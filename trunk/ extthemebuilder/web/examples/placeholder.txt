@@ -1,0 +1,2 @@
+10, How to create theme changer in your application, xtheme-<b>Theme name</b>.zip file contains two folders: <b>css</b> and <b>images</b>. You should unzip the file and copy them to the <b>resources</b> folder of your ExtJS application. You should create tag
+http://extbuilder.dynalias.com/springapp/getResource.htm?resourcePath=/WEB-INF/resources/images/default/form/trigger.gif&rnd=0.1744486212237416

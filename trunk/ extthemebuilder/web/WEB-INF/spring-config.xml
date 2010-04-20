@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <bean id="resourceHolderPool" class="cesium.pool.ResourceHolderPool" scope="singleton">
+        <constructor-arg value="60000"/>
+        <constructor-arg value="5"/>
+        <constructor-arg ref="resourcesPath"/>
+        <constructor-arg ref="loaderFactory"/>
+        <constructor-arg ref="blueThemeSettings"/>
+    </bean>
+    <bean id="resource31HolderPool" class="cesium.pool.ResourceHolderPool" scope="singleton">
+        <constructor-arg value="60000"/>
+        <constructor-arg value="5"/>
+        <constructor-arg ref="resources31Path"/>
+        <constructor-arg ref="loaderFactory"/>
+        <constructor-arg ref="blue31ThemeSettings"/>
+    </bean>
+    <bean id="resource32HolderPool" class="cesium.pool.ResourceHolderPool" scope="singleton">
+        <constructor-arg value="60000"/>
+        <constructor-arg value="5"/>
+        <constructor-arg ref="resources32Path"/>
+        <constructor-arg ref="loaderFactory"/>
+        <constructor-arg ref="blue32ThemeSettings"/>
+    </bean>
+
+    <bean id="resourceGrayHolderPool" class="cesium.pool.ResourceHolderPool" scope="singleton">
+        <constructor-arg value="60000"/>
+        <constructor-arg value="5"/>
+        <constructor-arg ref="resourcesGrayPath"/>
+        <constructor-arg ref="loaderFactory"/>
+        <constructor-arg ref="grayThemeSettings"/>
+    </bean>
+    <bean id="resourceGray31HolderPool" class="cesium.pool.ResourceHolderPool" scope="singleton">
+        <constructor-arg value="60000"/>
+        <constructor-arg value="5"/>
+        <constructor-arg ref="resourcesGray31Path"/>
+        <constructor-arg ref="loaderFactory"/>
+        <constructor-arg ref="gray31ThemeSettings"/>
+    </bean>
+    <bean id="resourceGray32HolderPool" class="cesium.pool.ResourceHolderPool" scope="singleton">
+        <constructor-arg value="60000"/>
+        <constructor-arg value="5"/>
+        <constructor-arg ref="resourcesGray32Path"/>
+        <constructor-arg ref="loaderFactory"/>
+        <constructor-arg ref="gray32ThemeSettings"/>
+    </bean>
+
+    <bean id="resourceToolsetHolderPool" class="cesium.pool.ResourceHolderPool" scope="singleton">
+        <constructor-arg value="60000"/>
+        <constructor-arg value="10"/>
+        <constructor-arg ref="resourcesToolsetPath"/>
+        <constructor-arg ref="loaderFactory"/>
+        <constructor-arg ref="grayThemeSettings"/>
+    </bean>
+    <bean id="resourceDrawableHolderPool" class="cesium.pool.ResourceHolderPool" scope="singleton">
+        <constructor-arg value="60000"/>
+        <constructor-arg value="10"/>
+        <constructor-arg ref="resourcesDrawablePath"/>
+        <constructor-arg ref="loaderFactory"/>
+        <constructor-arg ref="grayThemeSettings"/>
+    </bean>
+
+    <bean id="blueThemeSettings" class="cesium.theme.settings.BlueThemeSettings" scope="singleton"/>
+    <bean id="blue31ThemeSettings" class="cesium.theme.settings.Blue31ThemeSettings" scope="singleton"/>
+    <bean id="blue32ThemeSettings" class="cesium.theme.settings.Blue32ThemeSettings" scope="singleton"/>
+
+    <bean id="grayThemeSettings" class="cesium.theme.settings.GrayThemeSettings" scope="singleton"/>
+    <bean id="gray31ThemeSettings" class="cesium.theme.settings.Gray31ThemeSettings" scope="singleton"/>
+    <bean id="gray32ThemeSettings" class="cesium.theme.settings.Gray32ThemeSettings" scope="singleton"/>
+
+    <bean id="schemaLoader" class="cesium.loader.SchemaResourcesLoaderImpl" scope="prototype">
+        <property name="resourcesLoaderFactory" ref="loaderFactory"/>
+    </bean>
+    <bean id="cssLoader" class="cesium.loader.CSSResourceLoaderImpl"  scope="prototype">
+        <property name="resourcesLoaderFactory" ref="loaderFactory"/>
+    </bean>
+    <bean id="gifLoader" class="cesium.loader.GIFResourceLoaderImpl"  scope="prototype">
+        <property name="resourcesLoaderFactory" ref="loaderFactory"/>
+    </bean>
+    <bean id="pngLoader" class="cesium.loader.PNGResourceLoaderImpl"  scope="prototype">
+        <property name="resourcesLoaderFactory" ref="loaderFactory"/>
+    </bean>
+    <bean id="psdLoader" class="cesium.loader.PSDResourceLoaderImpl"  scope="prototype">
+        <property name="resourcesLoaderFactory" ref="loaderFactory"/>
+    </bean>
+
+    <bean id="loaderFactory" class="cesium.factory.ResourcesLoaderFactoryImpl"  scope="prototype"/>
+
+    <bean id="processorFactory" class="cesium.factory.ResourcesProcessorFactoryImpl"  scope="prototype"/>
+
+    <bean id="resourcesPath" class="java.lang.String" >
+        <constructor-arg value="/WEB-INF/resources"/>
+        <!--<constructor-arg value="D:\projects\imageProcessor\resources"/>-->
+    </bean>
+    <bean id="resources31Path" class="java.lang.String" >
+        <constructor-arg value="/WEB-INF/resources31"/>
+    </bean>
+    <bean id="resources32Path" class="java.lang.String" >
+        <constructor-arg value="/WEB-INF/resources32"/>
+    </bean>
+    <bean id="resourcesGrayPath" class="java.lang.String" >
+        <constructor-arg value="/WEB-INF/resources_gray"/>
+    </bean>
+    <bean id="resourcesGray31Path" class="java.lang.String" >
+        <constructor-arg value="/WEB-INF/resources_gray31"/>
+    </bean>
+    <bean id="resourcesGray32Path" class="java.lang.String" >
+        <constructor-arg value="/WEB-INF/resources_gray32"/>
+    </bean>
+    <bean id="resourcesToolsetPath" class="java.lang.String" >
+        <constructor-arg value="/WEB-INF/resources_toolset"/>
+    </bean>
+    <bean id="resourcesDrawablePath" class="java.lang.String" >
+        <constructor-arg value="/WEB-INF/resources_drawable"/>
+    </bean>
+    <bean id="outputPath" class="java.lang.String" >
+        <constructor-arg value="C:/java/apache-tomcat-6.0.18/webapps/springapp/js/ext/resources"/>
+    </bean>
+
+</beans>
