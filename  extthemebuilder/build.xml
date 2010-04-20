@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<project name="springapp" basedir="." default="usage">
+    <property file="build.properties"/>
+
+    <property name="src.dir" value="src"/>
+    <property name="web.dir" value="web"/>
+    <property name="build.dir" value="${web.dir}/WEB-INF/classes"/>
+    <property name="name" value="springapp"/>
+
+    <path id="master-classpath">
+        <fileset dir="${web.dir}/WEB-INF/lib">
+            <include name="*.jar"/>
+        </fileset>
+        <!-- We need the servlet API classes: -->
+        <!--  * for Tomcat 5/6 use servlet-api.jar -->
+        <!--  * for other app servers - check the docs -->
+        <fileset dir="${appserver.lib}">
+            <include name="servlet*.jar"/>
+        </fileset>
+        <pathelement path="${build.dir}"/>
+    </path>
+
+    <target name="usage">
+        <echo message=""/>
+        <echo message="${name} build file"/>
+        <echo message="-----------------------------------"/>
+        <echo message=""/>
+        <echo message="Available targets are:"/>
+        <echo message=""/>
+        <echo message="build            --> Build the application"/>
+        <echo message="deploy           --> Deploy application as directory"/>
+        <echo message="deploywar        --> Deploy application as a WAR file"/>
+        <echo message="start_tomcat     --> Start Tomcat"/>
+        <echo message="stop_tomcat      --> Stop Tomcat"/>
+        <echo message="clean            --> Clean output directories"/>
+        <echo message="cleancache       --> Clean server cache directories"/>
+        <echo message="undeploy         --> Un-Deploy application"/>
+        <echo message=""/>
+    </target>
+
+    <target name="build" description="Compile main source tree java files">
+        <mkdir dir="${build.dir}"/>
+        <javac destdir="${build.dir}" source="1.5" target="1.5" debug="true"
+               deprecation="false" optimize="false" failonerror="true">
+            <src path="${src.dir}"/>
+            <classpath refid="master-classpath"/>
+        </javac>
+    </target>
+
+    <target name="deploy" depends="build,cleancache" description="Deploy application">
+        <copy todir="${deploy.path}/${name}" preservelastmodified="true">
+            <fileset dir="${web.dir}">
+                <include name="**/*.*"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="deploywar" depends="build" description="Create war and Deploy application as a WAR file">
+        <war destfile="${name}.war"
+             webxml="${web.dir}/WEB-INF/web.xml">
+            <fileset dir="${web.dir}">
+                <include name="**/*.*"/>
+            </fileset>
+        </war>
+        <copy todir="${deploy.path}" preservelastmodified="true">
+            <fileset dir=".">
+                <include name="*.war"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="start_tomcat">
+        <exec command="${appserver.home}/bin/startup.bat"/>
+    </target>
+
+    <target name="stop_tomcat">
+        <exec command="${appserver.home}/bin/shutdown.bat"/>
+    </target>
+<!-- End Tomcat tasks -->
+
+    <target name="clean" description="Clean output directories">
+        <delete>
+            <fileset dir="${build.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="cleancache" description="Clean server cache directories">
+        <delete dir="${appserver.cache}/${name}">
+        </delete>
+    </target>
+
+    <target name="undeploy" description="Un-Deploy application">
+        <delete dir="${deploy.path}/${name}"/>
+    </target>
+</project>

@@ -1,0 +1,189 @@
+.x-window-header .x-tool {
+	background:transparent no-repeat;
+	background-image: url(../images/default/panel/tool-sprites.png);
+	margin-left:0;
+}
+
+/* 1 */
+.x-window-header .x-tool-close {
+	background-position:0 -0;
+	height:18px;
+	width:44px;
+    margin-top: -4px;
+}
+.x-window-header .x-tool-close-over { background-position:-44px 0; }
+
+/* 2 */
+.x-window-header .x-tool-minimize {
+	background-position:-36px -18px;
+	height:18px;
+	width:26px;
+    margin-top: -4px;
+}
+.x-window-header .x-tool-minimize-over { background-position:-62px -18px; }
+
+/* 3 */
+.x-window-header .x-tool-maximize {
+	background-position:-38px -36px;
+	height:18px;
+	width:25px;
+    margin-top: -4px;
+}
+.x-window-header .x-tool-maximize-over { background-position:-63px -36px; }
+
+/* 4 */
+.x-window-header .x-tool-restore {
+	background-position:-38px -54px;
+	height:18px;
+	width:25px;
+    margin-top: -4px;
+}
+.x-window-header .x-tool-restore-over { background-position:-63px -54px; }
+
+/* 5 */
+.x-window-header .x-tool-toggle {
+	background-position:-38px -72px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+    margin-top: -4px;
+}
+.x-window-header .x-tool-toggle-over { background-position:-63px -72px; }
+
+.x-panel-collapsed .x-window-header .x-tool-toggle{
+    background-position:-38px -90px;
+    height:18px;
+    width:25px;
+    margin-right: 3px;
+    margin-top: -4px;
+}
+.x-panel-collapsed .x-window-header .x-tool-toggle-over {background-position:-63px -90px;}
+
+/* 6 */
+.x-window-header .x-tool-up {
+	background-position:-38px -234px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-up-over { background-position:-63px -234px; }
+
+/* 6 */
+.x-window-header .x-tool-down {
+	background-position:-38px -252px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-down-over { background-position:-63px -252px; }
+
+/* 7 */
+.x-window-header .x-tool-gear {
+	background-position:-38px -108px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-gear-over { background-position:-63px -108px; }
+
+/* 8 */
+.x-window-header .x-tool-left {
+	background-position:-38px -126px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-left-over { background-position:-63px -126px; }
+
+/* 9 */
+.x-window-header .x-tool-right {
+	background-position:-38px -144px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-right-over { background-position:-63px -144px; }
+
+/* 10 */
+.x-window-header .x-tool-pin {
+	background-position:-38px -162px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-pin-over { background-position:-63px -162px; }
+
+/* 11 */
+.x-window-header .x-tool-unpin {
+	background-position:-38px -180px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-unpin-over { background-position:-63px -180px; }
+
+
+/* 16 */
+.x-window-header .x-tool-refresh {
+	background-position:-38px -270px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-refresh-over { background-position:-63px -270px; }
+
+/* 17 */
+.x-window-header .x-tool-plus {
+	background-position:-38px -288px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-plus-over { background-position:-63px -288px; }
+
+/* 18 */
+.x-window-header .x-tool-minus {
+	background-position:-38px -306px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-minus-over { background-position:-63px -306px; }
+
+/* 19 */
+.x-window-header .x-tool-search {
+	background-position:-38px -324px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-search-over { background-position:-63px -324px; }
+
+/* 20 */
+.x-window-header .x-tool-save {
+	background-position:-38px -342px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-save-over { background-position:-63px -342px; }
+
+/* 21 */
+.x-window-header .x-tool-help {
+	background-position:-38px -360px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-help-over { background-position:-63px -360px; }
+
+/* 22 */
+.x-window-header .x-tool-print {
+	background-position:-38px -378px;
+	height:18px;
+	width:25px;
+    margin-right: 3px;
+}
+.x-window-header .x-tool-print-over { background-position:-63px -378px; }
+
+

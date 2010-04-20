@@ -1,0 +1,175 @@
+.ext-error{background:transparent url(../js/ext/resources/images/default/window/icon-error.gif) no-repeat top left;}
+.window-icon { background: url( ../images/window.gif ) 0 6px no-repeat !important;}
+.form-icon { background: url( ../images/form.gif ) 0 6px no-repeat !important;}
+.x-tbar-pdf{background-image: url( ../images/pdf.gif ) !important;}
+.x-tbar-excel{background-image: url( ../images/excel_x.gif ) !important;}
+
+.x-item-disabled .x-tbar-excel{background-image: url( ../images/excel_x.gif ) !important;}
+.x-item-disabled .x-tbar-pdf{background-image: url( ../images/pdf.gif ) !important;}
+
+/*.x-combo-list{border:1px solid #98c0f4;background:#ddecfe;zoom:1;overflow:hidden;z-index:90010;}
+.x-combo-list-inner{overflow:auto;background:white;position:relative;zoom:1;overflow-x:hidden;z-index:90010;}
+.x-combo-list-hd{font:bold 11px tahoma,arial,helvetica,sans-serif;color:#15428b;background-image:url(../js/ext/resources/images/default/layout/panel-title-light-bg.gif);border-bottom:1px solid #98c0f4;padding:3px;z-index:90010;}
+.x-resizable-pinned .x-combo-list-inner{border-bottom:1px solid #98c0f4;z-index:90010;}
+.x-combo-list-item{font:normal 12px tahoma,arial,helvetica,sans-serif;padding:2px;border:1px solid #fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;z-index:90010;}
+.x-combo-noedit{cursor:pointer;z-index:90010;}
+.x-combo-list .x-toolbar{border-top:1px solid #98c0f4;border-bottom:0 none;z-index:90010;}
+.x-combo-list-small .x-combo-list-item{font:normal 11px tahoma,arial,helvetica,sans-serif;z-index:90010;}
+
+.x-menu{border:1px solid #718bb7;z-index:15000;zoom:1;background:#f0f0f0 url(../js/ext/resources/images/default/menu/menu.gif) repeat-y;padding:2px;}
+.x-menu a{text-decoration:none!important;}
+.ext-ie .x-menu{zoom:1;overflow:hidden;z-index:15000;}
+.x-menu-list{background:transparent;border:0 none;z-index:15000;}
+.x-menu li{line-height:100%;}
+.x-menu li.x-menu-sep-li{font-size:1px;line-height:1px;}
+.x-menu-list-item{font:normal 11px tahoma,arial,sans-serif;white-space:nowrap;-moz-user-select:none;-khtml-user-select:none;display:block;padding:1px;z-index:15000;}
+.x-menu-item-arrow{background:transparent url(../js/ext/resources/images/default/menu/menu-parent.gif) no-repeat right;}
+.x-menu-sep{display:block;font-size:1px;line-height:1px;margin:2px 3px;background-color:#e0e0e0;border-bottom:1px solid #fff;overflow:hidden;}
+.x-menu-focus{position:absolute;left:-1px;top:-1px;width:1px;height:1px;line-height:1px;font-size:1px;-moz-outline:0 none;outline:0 none;-moz-user-select:text;-khtml-user-select:text;overflow:hidden;display:block;}
+.x-menu a.x-menu-item{display:block;line-height:16px;padding:3px 21px 3px 3px;white-space:nowrap;text-decoration:none;color:#222;-moz-outline:0 none;outline:0 none;cursor:pointer;z-index:15000;}
+.x-menu-item-active{background:#ebf3fd url(../js/ext/resources/images/default/menu/item-over.gif) repeat-x left bottom;border:1px solid #aaccf6;padding:0;z-index:15000;}
+.x-menu-item-active a.x-menu-item{color:#233d6d;z-index:15000;}
+.x-menu-item-icon{border:0 none;height:16px;padding:0;vertical-align:top;width:16px;margin:0 8px 0 0;background-position:center;}
+.x-menu-check-item .x-menu-item-icon{background:transparent url(../js/ext/resources/images/default/menu/unchecked.gif) no-repeat center;}
+.x-menu-item-checked .x-menu-item-icon{background-image:url(../js/ext/resources/images/default/menu/checked.gif);}
+.x-menu-group-item .x-menu-item-icon{background:transparent;z-index:15000;}
+.x-menu-item-checked .x-menu-group-item .x-menu-item-icon{background:transparent url(../js/ext/resources/images/default/menu/group-checked.gif) no-repeat center;}
+.x-menu-plain{background:#fff!important;z-index:15000;}
+.x-menu-date-item{padding:0;z-index:15000;}
+.x-menu .x-color-palette,.x-menu .x-date-picker{margin-left:26px;margin-right:4px;z-index:15000;}
+.x-menu .x-date-picker{border:1px solid #a3bad9;margin-top:2px;margin-bottom:2px;z-index:15000;}
+.x-menu-plain .x-color-palette,.x-menu-plain .x-date-picker{margin:0;border:0 none;z-index:15000;}
+.x-date-menu{padding:0!important;z-index:15000;}
+.x-cycle-menu .x-menu-item-checked{border:1px dotted #a3bae9!important;background:#DFE8F6;padding:0;z-index:15000;}*/
+
+/*.x-layer{visibility:hidden;z-index:49000;}*/
+.x-over-layer{visibility:hidden;z-index:90010;}
+
+/*
+.x-toolbar .x-btn-over .x-btn-menu-arrow-wrap .x-btn-center button{background-position:0 -47px;}
+
+.x-btn-text-icon .x-btn-center .x-btn-text{background-position:0 2px;background-repeat:no-repeat;padding-left:18px;padding-top:3px;padding-bottom:2px;padding-right:0;}
+*/
+
+.ext-ux-uploaddialog-addbtn
+{
+	background: url( '../images/file-add.gif' ) !important;
+}
+
+.ext-ux-addbtn
+{
+	background: url( '../images/drop-add.gif' ) !important;
+}
+
+.ext-ux-viewbtn
+{
+	background: url( '../images/note.gif' ) no-repeat center center !important;
+}
+
+.x-button-print
+{
+	background: url( '../images/printer_fax.gif' ) no-repeat left center !important;
+}
+
+.ext-ux-uploaddialog-removebtn
+{
+	background: url( '../images/file-remove.gif' ) !important;
+}
+
+.ext-ux-removebtn
+{
+	background: url( '../images/delete.gif' ) !important;
+}
+
+.ext-ux-uploaddialog-resetbtn
+{
+	background: url( '../images/reset.gif' ) no-repeat left center !important;
+}
+
+.x-button-save {
+    background: url( '../images/disk.gif' ) no-repeat left center !important;
+}
+
+.x-button-edit {
+    background: url( '../images/edit.gif' ) no-repeat center center !important;
+}
+
+.ext-ux-nextbtn {
+    background: url( '../images/page-next.gif' ) no-repeat center center !important;
+}
+.ext-ux-prevbtn {
+    background: url( '../images/page-prev.gif' ) no-repeat center center !important;
+}
+.x-toolbar .ext-ux-nextbtn-disabled {
+    background: url( '../images/page-next-disabled.gif' ) no-repeat center center !important;
+}
+.x-toolbar .ext-ux-prevbtn-disabled {
+    background: url( '../images/page-prev-disabled.gif' ) no-repeat center center !important;
+}
+
+.ext-ux-button-reset {
+    background: url( '../images/reset.png' ) no-repeat left center !important;
+}
+
+
+/*.ux-taskbuttons-scroller-left {
+    background: transparent url( ../images/taskbar/scroll-left.gif ) no-repeat -18px 0;
+    width:18px;
+    position:absolute;
+    left:1px;
+    top:0px;
+    z-index:10;
+    cursor:pointer;
+}
+.ux-taskbuttons-scroller-left-over {
+    background-position: 0 0;
+}
+.ux-taskbuttons-scroller-left-disabled {
+    background-position: -18px 0;
+    opacity:.5;
+    -moz-opacity:.5;
+    filter:alpha(opacity=50);
+    cursor:default;
+}
+.ux-taskbuttons-scroller-right {
+    background: transparent url( ../images/taskbar/scroll-right.gif ) no-repeat 0 0;
+    width:18px;
+    position:absolute;
+    right:0;
+    top:0px;
+    z-index:10;
+    cursor:pointer;
+}
+.ux-taskbuttons-scroller-right-over {
+    background-position: -18px 0;
+}
+.ux-taskbuttons-scroller-right-disabled {
+    background-position: 0 0;
+    opacity:.5;
+    -moz-opacity:.5;
+    filter:alpha(opacity=50);
+    cursor:default;
+}*/
+
+
+.x-tbar-page-number{width:40px;height:14px;}
+
+/*.x-imagefield-preview{width:100px;height:100px;}*/
+
+.bmenu {
+    background-image: url( ../images/menu-show.gif ) !important;
+}
+
+
+.x-item-viewed {
+    color: black;
+    cursor: default;
+    opacity: .9;
+    -moz-opacity: .9;
+    filter: alpha(opacity=90);
+}
+
+.x-item-disabled * {
+    color: black !important;
+    cursor: default !important;
+}
