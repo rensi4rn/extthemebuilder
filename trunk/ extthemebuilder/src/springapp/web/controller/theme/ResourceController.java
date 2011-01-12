@@ -52,7 +52,16 @@ public class ResourceController implements Controller {
 
         String resourcesPath = currentSchema.getResourcesPath();
         String resourcePath = httpServletRequest.getParameter("resourcePath");
-        ResourcesHolder resource = currentSchema.findResourceByPath(resourcePath);
+        boolean b = null != resourcePath;
+        Integer hashCode = null;
+        if (b)
+            try {
+                hashCode = new Integer(Integer.parseInt(resourcePath));
+            } catch (NumberFormatException  e) {
+                hashCode = new Integer(resourcePath.hashCode());
+            }
+        //ResourcesHolder resource = currentSchema.findResourceByPath(resourcePath);
+        ResourcesHolder resource = currentSchema.findResourceByPathHashCode(hashCode);
 
         ResourcesLoader loader = loaderFactory.getResourcesLoader(resource, context);
         OutputStream outputStream = loader.outForWeb(resource, thisControllerUrl, resourcesPath);

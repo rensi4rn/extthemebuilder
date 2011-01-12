@@ -96,11 +96,11 @@ public class SchemaProcessorImpl extends AbstractResourcesProcessor{
                 renderingHints);
         //end operation  definition
 
-        ResourcesHolder resultHolder = processor.process(schemaHolder, brightenOp
+        ResourcesHolder resultHolder = processor.process(schemaHolder, null, brightenOp
                 , null, liteOp, null, null, null, null, null, null, null, null,
-                null, null, null, null, (byte)0, null, null, (byte)0, null);//todo: sc change test data
+                null, null, null, null, (byte)0, null, null, (byte)0, null);
 
-        loader.unloadResources(resultHolder, context, outputPath);//todo: sc change 
+        loader.unloadResources(resultHolder, context, outputPath);
         // destination parameter
 
         System.out.println("schemaHolder "+schemaHolder);

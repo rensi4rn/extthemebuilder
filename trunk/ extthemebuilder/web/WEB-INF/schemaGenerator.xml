@@ -14,11 +14,15 @@
     <bean name="/processSchema.htm" class="springapp.web.controller.theme.ProcessThemeController">
         <property name="resourcesProcessorFactory" ref="processorFactory"/>
         <property name="holderPool" ref="resourceHolderPool"/>
-        <property name="holderGrayPool" ref="resourceGrayHolderPool"/>
+        <property name="holder23Pool" ref="resource23HolderPool"/>
         <property name="holder31Pool" ref="resource31HolderPool"/>
         <property name="holder32Pool" ref="resource32HolderPool"/>
+        <property name="holder33Pool" ref="resource33HolderPool"/>
+        <property name="holderGrayPool" ref="resourceGrayHolderPool"/>
+        <property name="holderGray23Pool" ref="resourceGray23HolderPool"/>
         <property name="holderGray31Pool" ref="resourceGray31HolderPool"/>
         <property name="holderGray32Pool" ref="resourceGray32HolderPool"/>
+        <property name="holderGray33Pool" ref="resourceGray33HolderPool"/>
         <property name="holderToolsetPool" ref="resourceToolsetHolderPool"/>
         <property name="holderDrawablePool" ref="resourceDrawableHolderPool"/>
     </bean>
@@ -34,7 +38,9 @@
     <bean name="/dd_js.htm" class="springapp.web.controller.theme.examples.TreeAndDDController"/>
     <bean name="/win_js.htm" class="springapp.web.controller.theme.examples.WinController"/>
     <bean name="/btn_js.htm" class="springapp.web.controller.theme.examples.BtnController"/>
+    <bean name="/pivot_js.htm" class="springapp.web.controller.theme.examples.PivotGridController"/>
 
     <bean name="/getToolsets.htm" class="springapp.web.controller.theme.ToolsetsController"/>
+    <bean name="/getPivotData.htm" class="springapp.web.controller.theme.PivotDataController"/>
 
 </beans>

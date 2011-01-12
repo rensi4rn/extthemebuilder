@@ -16,6 +16,7 @@ import java.util.*;
 public abstract class AbstractResourcesHolder extends LinkedHashMap implements ResourcesHolder{
     protected UID ouid = new UID();
     private String resourcesPath;
+    private int resourcesPathHashCode;
     private boolean isForeground;
     private boolean isWhitable;
     private boolean isDrawable;
@@ -27,6 +28,15 @@ public abstract class AbstractResourcesHolder extends LinkedHashMap implements R
     private int[] borderColor;
     private boolean isToolset;
     private boolean isProcessingNotNeeded;
+    private ThemeParametersHolder themeParametersHolder;
+
+    public void setThemeParametersHolder(ThemeParametersHolder themeParametersHolder) {
+         this.themeParametersHolder=themeParametersHolder;
+    }
+
+    public ThemeParametersHolder getThemeParametersHolder() {
+        return themeParametersHolder;
+    }
 
     public boolean isDrawableColorIndependent() {
         return isDrawableColorIndependent;
@@ -121,6 +131,7 @@ public abstract class AbstractResourcesHolder extends LinkedHashMap implements R
 
     public void setResourcesPath(String resourcesPath) {
         this.resourcesPath = resourcesPath;
+        this.resourcesPathHashCode = null!=resourcesPath?resourcesPath.hashCode():0;
     }
     public ResourcesHolder findResourceByPath(String resourcePath) {
         ResourcesHolder result=null;
@@ -136,6 +147,28 @@ public abstract class AbstractResourcesHolder extends LinkedHashMap implements R
                 ResourcesHolder holder = (ResourcesHolder) this.get(key);
                 if (null!=holder){
                     result = holder.findResourceByPath(resourcePath);
+                    if (null!=result) break;
+                }
+            }
+        }
+        return result;
+    }
+
+    public ResourcesHolder findResourceByPathHashCode(Integer hashCode) {
+        ResourcesHolder result=null;
+        int pathHashCode = this.getResourcesPathHashCode();
+        if (null!=hashCode && 0!=pathHashCode && hashCode.intValue() == pathHashCode)
+            return this;
+        Object resObj = this.get(hashCode);
+        if (null!=resObj){
+            result = (ResourcesHolder) resObj;
+        }else if (this instanceof SchemaResourcesHolder){
+            Set set = this.keySet();
+            for (Iterator iterator = set.iterator(); iterator.hasNext();) {
+                Object key = iterator.next();
+                ResourcesHolder holder = (ResourcesHolder) this.get(key);
+                if (null!=holder){
+                    result = holder.findResourceByPathHashCode(hashCode);
                     if (null!=result) break;
                 }
             }
@@ -208,6 +241,14 @@ public abstract class AbstractResourcesHolder extends LinkedHashMap implements R
                     resObj = this.get(key);
                     break;
                 }
+            }else {
+                ResourcesHolder resourcesHolder = (ResourcesHolder) this.get(objKey);
+                String path = resourcesHolder.getResourcesPath();
+                if (path.endsWith(fileName)){
+                    resObj = resourcesHolder;
+                    break;
+                }
+
             }
         }
         if (null!=resObj){
@@ -224,6 +265,10 @@ public abstract class AbstractResourcesHolder extends LinkedHashMap implements R
             }
         }
         return result;
+    }
+
+    public int getResourcesPathHashCode() {
+        return resourcesPathHashCode;
     }
 
     public boolean equals(Object o) {

@@ -76,17 +76,7 @@ createWindow : function(idWin){
     });
 
     tree.getRootNode().expand(true);
-/*
 
-
-        var panel = new Ext.Panel({
-            frame:true
-            ,xtype:'panel'
-            , margin:'10 10 10 10'
-            , region:'center'
-            , layout:'fit'
-            , buttonAlign:'center'
-            , items:[tabs]});*/
 
         listWin = new Ext.ux.MyApp.CesiumBaseWindow({
             id:idWin,

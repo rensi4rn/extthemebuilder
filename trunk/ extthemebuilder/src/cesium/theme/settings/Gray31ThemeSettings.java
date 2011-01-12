@@ -14,19 +14,6 @@ package cesium.theme.settings;
  */
 public class Gray31ThemeSettings extends GrayThemeSettings{
 
-    public boolean isResizableOpacityCSSProperty(String rule, String propertys){
-        return super.isResizableOpacityCSSProperty(rule, propertys)
-                || (
-                "opacity".equalsIgnoreCase(propertys)
-                &&(
-                        (rule.indexOf(".x-resizable-over")>=0
-                        && rule.indexOf(".x-resizable-handle")>=0
-                        && rule.indexOf(".x-resizable-pinned")>=0
-                        && rule.indexOf(".x-resizable-handle")>=0
-                )))
-                ;
-    }
-
     public BorderSet getBorderSetGIF(String resourcePath) {
         BorderSet result = new BorderSet();
         boolean isBorder=false;
@@ -204,7 +191,7 @@ public class Gray31ThemeSettings extends GrayThemeSettings{
 
             };
         } else if (
-                resourcePath.endsWith("/tool-sprites.gif") //todo: soursce was changed
+                resourcePath.endsWith("/tool-sprites.gif")
                         ||resourcePath.endsWith("/tool-sprite-tpl.gif")
                 ){
             //tools buttons border
@@ -329,15 +316,4 @@ public class Gray31ThemeSettings extends GrayThemeSettings{
         return result;
     }
 
-    public boolean isHeaderGIF(String resourcePath) {
-        return super.isHeaderGIF(resourcePath)
-                ||resourcePath.endsWith("sizer/e-handle.gif")
-                ||resourcePath.endsWith("sizer/s-handle.gif")
-                ||resourcePath.endsWith("sizer/se-handle.gif")
-                ||resourcePath.endsWith("sizer/nw-handle.gif")
-                ||resourcePath.endsWith("sizer/ne-handle.gif")
-                ||resourcePath.endsWith("sizer/sw-handle.gif")
-
-                ;
-    }
 }

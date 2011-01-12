@@ -391,7 +391,7 @@ Ext.ux.ColorPicker = Ext.extend( Ext.BoxComponent, {
 	 * @return {Integer}
 	 */
 	realToDec: function( n ) {
-		return Math.min( 255, Math.round( n * 256 ) );
+		return Math.min( 255, Math.round( n * 255 ) );
 	},
 	/**
 	 * Convert RGB color format to Hexa color format

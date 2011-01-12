@@ -363,7 +363,7 @@ public class GrayThemeSettings extends BlueThemeSettings{
                                 ,Integer.parseInt("90add5", 16)*/
             };
         } else if (
-                resourcePath.endsWith("/tool-sprites.gif") //todo: soursce was changed
+                resourcePath.endsWith("/tool-sprites.gif")
                         ||resourcePath.endsWith("/tool-sprite-tpl.gif")
                 ){
             //tools buttons border

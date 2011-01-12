@@ -262,7 +262,7 @@ public class CustomParser extends Parser{
             {
                 String val = scanner.getStringValue();
                 nextIgnoreSpaces();
-                if(val.equalsIgnoreCase("inherit"))
+                if("inherit".equalsIgnoreCase(val))
                     return CSSLexicalUnit.createSimple((short)12, prev);
                 else
                     return CSSLexicalUnit.createString((short)35, val, prev);
@@ -276,9 +276,7 @@ public class CustomParser extends Parser{
             }
 
             case 27: // '\033'
-            {
                 return hexcolor(prev);
-            }
         }
         throw createCSSParseException("token", new Object[] {
                 new Integer(current)
@@ -303,7 +301,7 @@ public class CustomParser extends Parser{
             case 114: // 'r'
             {
                 LexicalUnit lu;
-                if(name.equalsIgnoreCase("rgb")) {
+                if("rgb".equalsIgnoreCase(name)) {
                     lu = params;
                     if(lu != null)
                         switch(lu.getLexicalUnitType()) {
@@ -342,7 +340,7 @@ public class CustomParser extends Parser{
                         }
                     break;
                 }
-                if(!name.equalsIgnoreCase("rect"))
+                if(!"rect".equalsIgnoreCase(name))
                     break;
                 lu = params;
                 if(lu == null)
@@ -370,7 +368,7 @@ public class CustomParser extends Parser{
                         break;
 
                     case 35: // '#'
-                        if(!lu.getStringValue().equalsIgnoreCase("auto"))
+                        if(!"auto".equalsIgnoreCase(lu.getStringValue()))
                             break label0;
                         lu = lu.getNextLexicalUnit();
                         break;
@@ -422,7 +420,7 @@ public class CustomParser extends Parser{
                         break;
 
                     case 35: // '#'
-                        if(!lu.getStringValue().equalsIgnoreCase("auto"))
+                        if(!"auto".equalsIgnoreCase(lu.getStringValue()))
                             break label0;
                         lu = lu.getNextLexicalUnit();
                         break;
@@ -474,7 +472,7 @@ public class CustomParser extends Parser{
                         break;
 
                     case 35: // '#'
-                        if(!lu.getStringValue().equalsIgnoreCase("auto"))
+                        if(!"auto".equalsIgnoreCase(lu.getStringValue()))
                             break label0;
                         lu = lu.getNextLexicalUnit();
                         break;
@@ -526,7 +524,7 @@ public class CustomParser extends Parser{
                         break;
 
                     case 35: // '#'
-                        if(!lu.getStringValue().equalsIgnoreCase("auto"))
+                        if(!"auto".equalsIgnoreCase(lu.getStringValue()))
                             break label0;
                         lu = lu.getNextLexicalUnit();
                         break;
@@ -552,7 +550,7 @@ public class CustomParser extends Parser{
             case 99: // 'c'
             {
                 LexicalUnit lu;
-                if(name.equalsIgnoreCase("counter")) {
+                if("counter".equalsIgnoreCase(name)) {
                     lu = params;
                     if(lu == null)
                         break;
@@ -588,7 +586,7 @@ public class CustomParser extends Parser{
                         return CSSLexicalUnit.createPredefinedFunction((short)25, params, prev);
                     break;
                 }
-                if(!name.equalsIgnoreCase("counters"))
+                if(!"counters".equalsIgnoreCase(name))
                     break;
                 lu = params;
                 if(lu == null)
@@ -649,7 +647,7 @@ public class CustomParser extends Parser{
             case 65: // 'A'
             case 97: // 'a'
             {
-                if(!name.equalsIgnoreCase("attr"))
+                if(!"attr".equalsIgnoreCase(name))
                     break;
                 LexicalUnit lu = params;
                 if(lu == null)

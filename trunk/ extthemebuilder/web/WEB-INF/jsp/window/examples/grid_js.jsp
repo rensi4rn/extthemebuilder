@@ -72,7 +72,7 @@ Ext.grid.dummyData = [
 
 // add in some dummy descriptions
 for(var i = 0; i < Ext.grid.dummyData.length; i++){
-    Ext.grid.dummyData[i].push('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed metus nibh, sodales a, porta at, vulputate eget, dui. Pellentesque ut nisl. Maecenas tortor turpis, interdum non, sodales non, iaculis ac, lacus. Vestibulum auctor, tortor quis iaculis malesuada, libero lectus bibendum purus, sit amet tincidunt quam turpis vel lacus. In pellentesque nisl non sem. Suspendisse nunc sem, pretium eget, cursus a, fringilla vel, urna.<br/><br/>Aliquam commodo ullamcorper erat. Nullam vel justo in neque porttitor laoreet. Aenean lacus dui, consequat eu, adipiscing eget, nonummy non, nisi. Morbi nunc est, dignissim non, ornare sed, luctus eu, massa. Vivamus eget quam. Vivamus tincidunt diam nec urna. Curabitur velit.');
+    Ext.grid.dummyData[i].push(Ext.dummy.bogusMarkup);
 }
     
     ////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +124,6 @@ for(var i = 0; i < Ext.grid.dummyData.length; i++){
         region:'center',
         frame:false,
         header:false,
-        //title:'Support for standard Panel features such as framing, buttons and toolbars',
         iconCls:'icon-grid'
     });
 

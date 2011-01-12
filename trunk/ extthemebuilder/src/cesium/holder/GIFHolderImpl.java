@@ -43,11 +43,11 @@ public class GIFHolderImpl extends AbstractResourcesHolder  implements Resources
     }
 
     public String getResourcesPath() {
-        return getPath();
+        return path;
     }
 
     public void setResourcesPath(String path) {
-        setPath(path);
+        this.path = path;
     }
 
     public GIFHolderImpl() {
@@ -62,10 +62,10 @@ public class GIFHolderImpl extends AbstractResourcesHolder  implements Resources
     }
 
     public Object getContent() {
-        return this.getResource();
+        return this.resource;
     }
 
     public void setContent(Object obj) {
-        this.setResource( obj);
+        this.resource = obj;
     }
 }

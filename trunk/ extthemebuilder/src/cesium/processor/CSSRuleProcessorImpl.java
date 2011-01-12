@@ -2,6 +2,7 @@ package cesium.processor;
 
 import cesium.factory.ResourcesProcessorFactoryImpl;
 import cesium.holder.ResourcesHolder;
+import cesium.holder.ThemeParametersHolder;
 import cesium.op.ExtJSRescaleOp;
 import cesium.op.ForegroundShiftOp;
 import org.springframework.context.ApplicationContext;
@@ -26,8 +27,7 @@ public class CSSRuleProcessorImpl extends AbstractResourcesProcessor {
         this.setResourcesProcessorFactory(resourcesProcessorFactory);
     }
 
-    //todo: sc fake process method to exclude some rules from processing
-    public ResourcesHolder process(ResourcesHolder resHolder, ExtJSRescaleOp brightenOp,
+    public ResourcesHolder process(ResourcesHolder resHolder, ThemeParametersHolder themeParametersHolder, ExtJSRescaleOp brightenOp,
                                    ForegroundShiftOp foregroundOp, ExtJSRescaleOp liteOp,
                                    ExtJSRescaleOp bgOp, ExtJSRescaleOp fontOp,
                                    ExtJSRescaleOp transparencyOp, ExtJSRescaleOp borderOp,
@@ -37,7 +37,7 @@ public class CSSRuleProcessorImpl extends AbstractResourcesProcessor {
                                    String familyFont, String weightFont, byte sizeFont, ResourcesHolder drawableSchemaHolder) {
         //String resourcesPath = resHolder.getResourcesPath();
         //System.out.println("prop path = "+ resourcesPath);
-            return super.process(resHolder, brightenOp, foregroundOp, liteOp,
+            return super.process(resHolder, themeParametersHolder, brightenOp, foregroundOp, liteOp,
                     bgOp, fontOp, transparencyOp, borderOp, (AffineTransformOp) affineTransformOp,
                     headerFontOp, shadowTransparencyOp, headerOp, toolsetSchemaHolder, toolsetName,
                     familyHeaderFont, weightHeaderFont, sizeHeaderFont, familyFont, weightFont, sizeFont, drawableSchemaHolder);

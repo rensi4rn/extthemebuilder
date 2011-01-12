@@ -56,7 +56,7 @@ public abstract class AbstractResourcesLoader implements ResourcesLoader{
 
     public void unloadResources(ResourcesHolder holder, ApplicationContext context, Object destination) {
 
-        ResourcesLoaderFactory loaderFactory = getResourcesLoaderFactory();
+        ResourcesLoaderFactory loaderFactory = resourcesLoaderFactory;
 
         if (null != holder){
             Set set = holder.keySet();
@@ -76,7 +76,7 @@ public abstract class AbstractResourcesLoader implements ResourcesLoader{
     public ZipOutputStream outForZip(ResourcesHolder holder, String resourcesPath
             , ZipOutputStream zipOS, ApplicationContext context, String newSchemaName, String templateName, String version)
             throws IOException {
-        ResourcesLoaderFactory loaderFactory = getResourcesLoaderFactory();
+        ResourcesLoaderFactory loaderFactory = resourcesLoaderFactory;
 
         if (null != holder){
             Set set = holder.keySet();

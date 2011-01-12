@@ -13,19 +13,7 @@ package cesium.theme.settings;
  * @Time: 14:24:20
  */
 public class Blue31ThemeSettings extends BlueThemeSettings{
-    public boolean isResizableOpacityCSSProperty(String rule, String propertys){
-        return super.isResizableOpacityCSSProperty(rule, propertys)
-                || (
-                "opacity".equalsIgnoreCase(propertys)
-                &&(
-                        (rule.indexOf(".x-resizable-over")>=0
-                        && rule.indexOf(".x-resizable-handle")>=0
-                        && rule.indexOf(".x-resizable-pinned")>=0
-                        && rule.indexOf(".x-resizable-handle")>=0
-                )))
-                ;
-    }
-    
+
     public BorderSet getBorderSetGIF(String resourcePath) {
         BorderSet borderSet = super.getBorderSetGIF(resourcePath);
                     //tabs
@@ -46,17 +34,5 @@ public class Blue31ThemeSettings extends BlueThemeSettings{
                 borderSet.setBorderColor(borderColor);
             }
         return borderSet;
-    }
-
-    public boolean isHeaderGIF(String resourcePath) {
-        return super.isHeaderGIF(resourcePath)
-                ||resourcePath.endsWith("sizer/e-handle.gif")
-                ||resourcePath.endsWith("sizer/s-handle.gif")
-                ||resourcePath.endsWith("sizer/se-handle.gif")
-                ||resourcePath.endsWith("sizer/nw-handle.gif")
-                ||resourcePath.endsWith("sizer/ne-handle.gif")
-                ||resourcePath.endsWith("sizer/sw-handle.gif")
-
-                ;
     }
 }

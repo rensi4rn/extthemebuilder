@@ -1,3 +1,4 @@
+<%@ page import="springapp.constants.ApplicationConstants" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
 <html>
@@ -5,7 +6,7 @@
 
 <head><title><spring:message code="app.title"/></title>
 <meta name="description"
-      content="Simple online theme builder for ExtJS 3.x" />
+      content="Simple online theme builder for ExtJS" />
 <meta name="keywords"
       content="ExtJS, ExtJS themes, Theme, Download, ONLINE, ON-LINE,ON-LINE builder, online theme builder, ExtJS theme builder, on-line theme builder for ExtJS, ExtJS, ExtJS theme generator, Download ExtJS themes, extjs schemes, schema for extjs" />
 
@@ -13,7 +14,6 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/css/cesium.css"/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/js/ext/multiselect/superboxselect.css"/>" />
 
-<link rel="stylesheet" type="text/css" href="<c:url value="/js/ext/colorpicker/colorpicker.css"/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/js/ext/portal/Portal.css"/>" />
 <link rel="stylesheet" type="text/css" href="<c:url value="/js/ext/image_chooser/ImageChooserField.css"/>" />
 
@@ -33,8 +33,6 @@
 <script type="text/javascript" src="<c:url value="/js/ext/portal/PortalColumn.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/js/ext/portal/Portlet.js"/>"></script>
 
-<script type="text/javascript" src="<c:url value="/examples/ux/TabCloseMenu.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/examples/shared/examples.js"/>"></script>
 <!--finish schema generator and examples components-->
 <script type="text/javascript" src="<c:url value="/examples/ux/Spinner.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/examples/ux/SpinnerField.js"/>"></script>
@@ -53,18 +51,21 @@
     Ext.namespace('Ext.ux.MyApp');
 
     var myView;
-    var histStack={
+    var hist={
         stack:new Array(0),
         currIndex:-1,
         getToken:function(){
-            return this.currIndex<0||this.currIndex>=this.stack.length
+            var ci = this.currIndex;
+            var st = this.stack;
+            return ci<0||ci>=st.length
                     ?null
-                    :this.stack[this.currIndex];
+                    :st[ci];
         },
         addToken:function(token){
-            if (token!=this.stack[this.stack.length-1]){
-                this.stack.push(token);
-                this.currIndex=this.stack.length-1;
+            var st = this.stack;
+            if (token!=st[st.length-1]){
+                st.push(token);
+                this.currIndex=st.length-1;
             }
         },
         isLast:function(){
@@ -83,66 +84,91 @@
         forward:function(){
             if (this.currIndex<this.stack.length-1)
                 this.currIndex++;
+        },
+        first:function(){
+            if (this.stack.length==0){
+                this.currIndex=-1;
+            } else if (this.currIndex!=0){
+                this.currIndex=0;
+        }
+        },
+        last:function(){
+            if (this.currIndex<this.stack.length-1)
+                this.currIndex=this.stack.length-1;
         }
     };
 
-    var ccs = function(params, needSaveHist, successHandler, showWait){
-            if (showWait)
-                var waitMsg = Ext.MessageBox.wait('<spring:message code="there.is.a.generation.of.the.colour.scheme"/>');
+    var ccs = function(prms, nSHist, scsHndlr, shWt){
+            if (shWt)
+                var waitMsg = Ext.Msg.wait('<spring:message code="there.is.a.generation.of.the.colour.scheme"/>','Please, wait.');
 
-            var failureProcessing = function(){
-                //waitMsg.hide();
-                Ext.MessageBox.alert ('Error','Processing theme failed');
+            var flrProc = function(optns){
+                if (optns.showWait) optns.waitMsg.hide();
+                Ext.Msg.alert ('Error','Processing theme failed');
             };
 
             Ext.Ajax.request({
                 url:'<c:url value="/processSchema.htm" />',
-                params:params,
+                params:prms,
                 method:'POST',
                 timeout:60000,
-                saveHist:needSaveHist,
-                success:successHandler,
-                failure:failureProcessing,
-                showWait:showWait,
-                callback:function(optns, succ, resp){
-                    if (optns.showWait) waitMsg.hide();
-                    if (!succ){
-                        optns.failure();
-                    }
-                }
+                saveHist:nSHist,
+                disableCaching:true,
+                success:scsHndlr,
+                failure:flrProc,
+                waitMsg:waitMsg,
+                showWait:shWt
             });
         };
+    Ext.dummy = {};
+    Ext.dummy.shortBogusMarkup = '<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed metus nibh, sodales a, porta at, vulputate eget, dui. Pellentesque ut nisl. Maecenas tortor turpis, interdum non, sodales non, iaculis ac, lacus. Vestibulum auctor, tortor quis iaculis malesuada, libero lectus bibendum purus, sit amet tincidunt quam turpis vel lacus. In pellentesque nisl non sem. Suspendisse nunc sem, pretium eget, cursus a, fringilla vel, urna.';
+    Ext.dummy.bogusMarkup = '<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Sed metus nibh, sodales a, porta at, vulputate eget, dui. Pellentesque ut nisl. Maecenas tortor turpis, interdum non, sodales non, iaculis ac, lacus. Vestibulum auctor, tortor quis iaculis malesuada, libero lectus bibendum purus, sit amet tincidunt quam turpis vel lacus. In pellentesque nisl non sem. Suspendisse nunc sem, pretium eget, cursus a, fringilla vel, urna.<br/><br/>Aliquam commodo ullamcorper erat. Nullam vel justo in neque porttitor laoreet. Aenean lacus dui, consequat eu, adipiscing eget, nonummy non, nisi. Morbi nunc est, dignissim non, ornare sed, luctus eu, massa. Vivamus eget quam. Vivamus tincidunt diam nec urna. Curabitur velit.</p>';
 
     Ext.onReady(function(){
         Ext.QuickTips.init();
+        var succ = function(resp, option){
+            var bl='blue';
+            var gr='gray';
+            var thId = option.params.<%=ApplicationConstants.TEMPLATE_ID%>;
+            var ver= option.params.version;
+            var isGray = thId&&(thId==1);
+            var verPstFx = ((!ver)||ver.indexOf(".")<0)
+                ?'33'
+                :((ver=='3.0')?'':ver.replace('.',''));
+            var resDirSfx = (isGray?'_'+gr:'')+verPstFx;
+            var thName = isGray?gr:bl;
+                    var link = (Ext.isIE&&!Ext.isIE7&&!Ext.isIE8
+                    ?'<c:url value="/getResource.htm"/>?resourcePath='+'/WEB-INF/resources'+resDirSfx+'/css/xtheme-'+thName+'_ie6.css'+'&rnd='
+                    :'<c:url value="/getResource.htm"/>?resourcePath='+'/WEB-INF/resources'+resDirSfx+'/css/xtheme-'+thName+'.css'+'&rnd=')
+                            + Math.random();
+                    Ext.util.CSS.swapStyleSheet('theme'
+                            , link);
 
+            if (option.saveHist){
+                var tkn = Ext.util.JSON.encode(option.params);
+                hist.addToken(tkn);
+            }
+            var text = 'javascript:(function(){var fileref=document.createElement("link");fileref.setAttribute("rel","stylesheet");fileref.setAttribute("type","text/css");fileref.setAttribute("href","http://extbuilder.dynalias.com' + link+'&JSESSIONID=<%=session.getId()%>");fileref.setAttribute("id","'+link+'");if (typeof fileref!="undefined")document.getElementsByTagName("head")[0].appendChild(fileref);}())'
+            var thirdColumn = myView.infoPortal.items.items[2];
+            if (thirdColumn
+                    &&thirdColumn.items.items[1]
+                    &&thirdColumn.items.items[1].body
+                    )
+                thirdColumn.items.items[1].body.update(text);
+
+            if (option.showWait) option.waitMsg.hide();
+            };
         var curThToken = Ext.util.Cookies.get('theme');
         if (curThToken&&(curThToken!='')){
             var params = Ext.util.JSON.decode(curThToken);
-            var succ = function(resp, option){
-                    var blue='blue';
-                    var gray='gray';
-                    var isGray = option.params.templateId&&(option.params.templateId==1);
-                    var versionPostFix = ((!option.params.version)||option.params.version.indexOf(".")<0)
-                        ?'32'
-                        :(option.params.version=='3.0'?'':option.params.version.replace('.',''));
-                    var resDirSuffix = (isGray?'_'+gray:'')+versionPostFix;
-                    var thName = isGray?gray:blue;
-                    Ext.util.CSS.swapStyleSheet('theme'
-                            , (Ext.isIE&&!Ext.isIE7&&!Ext.isIE8
-                            ?'<c:url value="/getResource.htm"/>?resourcePath='+'/WEB-INF/resources'+resDirSuffix+'/css/xtheme-'+thName+'_ie6.css'+'&rnd='
-                            :'<c:url value="/getResource.htm"/>?resourcePath='+'/WEB-INF/resources'+resDirSuffix+'/css/xtheme-'+thName+'.css'+'&rnd=')
-                            + Math.random());
-
-                    var token = Ext.util.JSON.encode(option.params);
-                    histStack.addToken(token);
-            };
+            if (params&&!params.newColor) //to define old parameter names in cookies
             ccs(params, true, succ,false);
         }
         myView = new Ext.ux.MyApp.springApp(
         {
             appTitle:'<spring:message code="app.title"/>',
-            navigationPanelTitle:'<spring:message code="navigation.panel.title"/>'
+            navigationPanelTitle:'<spring:message code="navigation.panel.title"/>',
+            scsFn:succ
         }
                 );
     });

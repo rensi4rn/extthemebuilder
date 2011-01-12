@@ -12,16 +12,7 @@ package cesium.holder;
  */
 public class SchemaResourcesHolderImpl extends AbstractResourcesHolder
         implements SchemaResourcesHolder {
-    private String resourcesPath;
     private String outputPath;
-
-    public String getResourcesPath() {
-        return resourcesPath;
-    }
-
-    public void setResourcesPath(String path) {
-        this.resourcesPath = path;
-    }
 
     public String getOutputPath() {
         return outputPath;
@@ -32,10 +23,10 @@ public class SchemaResourcesHolderImpl extends AbstractResourcesHolder
     }
 
     public Object getContent() {
-        return this.getResourcesPath();
+        return getResourcesPath();
     }
 
     public void setContent(Object obj) {
-        this.setResourcesPath((String)obj);
+        setResourcesPath((String) obj);
     }
 }

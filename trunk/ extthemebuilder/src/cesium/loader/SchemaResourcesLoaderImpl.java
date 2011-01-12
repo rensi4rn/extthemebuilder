@@ -45,14 +45,13 @@ public class SchemaResourcesLoaderImpl extends AbstractResourcesLoader{
         Set paths = null;
 
         paths = servletContext.getResourcePaths(resourcesPath);
-        //for (int i = 0; null!=paths&&i < paths.size(); i++) {
         for (Iterator iterator = paths.iterator(); iterator.hasNext();) {
             String path = (String) iterator.next();
             if (!".svn".equals(path)){
                 ResourcesLoader dirLoader = loaderFactory.getResourcesLoader(
                         path, context);
                 ResourcesHolder dirHolder = dirLoader.loadResources(path, context,servletContext, themeSettings);
-                result.put(path,dirHolder);
+                result.put(new Integer(path.hashCode()),dirHolder);
             }
         }
 
@@ -86,7 +85,7 @@ public class SchemaResourcesLoaderImpl extends AbstractResourcesLoader{
             ResourcesLoader dirLoader = loaderFactory.getResourcesLoader(
                     path, context);
             ResourcesHolder dirHolder = dirLoader.loadResources(path, context, themeSettings);
-            result.put(path,dirHolder);
+            result.put(new Integer(path.hashCode()),dirHolder);
         }
 
         File[] files = null;
@@ -106,7 +105,7 @@ public class SchemaResourcesLoaderImpl extends AbstractResourcesLoader{
             ResourcesLoader fileLoader = loaderFactory.getResourcesLoader(
                     path, context);
             ResourcesHolder fileHolder = fileLoader.loadResources(path, context, themeSettings);
-            result.put(path,fileHolder);
+            result.put(new Integer(path.hashCode()),fileHolder);
         }
 
 

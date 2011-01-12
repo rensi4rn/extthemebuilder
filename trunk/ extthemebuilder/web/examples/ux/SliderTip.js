@@ -1,14 +1,3 @@
-/*!
- * Ext JS Library 3.0.0
- * Copyright(c) 2006-2009 Ext JS, LLC
- * licensing@extjs.com
- * http://www.extjs.com/license
- */
-/**
- * @class Ext.ux.SliderTip
- * @extends Ext.Tip
- * Simple plugin for using an Ext.Tip with a slider to show the slider value
- */
 Ext.ux.SliderTip = Ext.extend(Ext.Tip, {
     minWidth: 10,
     offsets : [0, -10],

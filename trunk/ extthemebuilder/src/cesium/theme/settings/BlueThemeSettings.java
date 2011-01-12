@@ -20,7 +20,7 @@ public class BlueThemeSettings implements ThemeSettings{
 
     public boolean isForegroundCSSProperty(String rule, String property) {
         return "color".equalsIgnoreCase(property)
-                || (rule.equalsIgnoreCase("*.x-grid3-row-over"));
+                /*|| ("*.x-grid3-row-over".equalsIgnoreCase(rule))*/;
     }
 
     public boolean isBorderColorCSSProperty(String rule, String property) {
@@ -30,10 +30,15 @@ public class BlueThemeSettings implements ThemeSettings{
     public boolean isBackgroundCSSProperty(String rule, String property) {
         return (
                 (rule.indexOf("x-panel-body")>=0)
-                        || (rule.equalsIgnoreCase("*.x-grid3"))
+                        || ("*.x-grid3".equalsIgnoreCase(rule))
 
-                        || (rule.equalsIgnoreCase("*.x-grid3-row-alt"))
-                        || (rule.equalsIgnoreCase("*.x-grid3-row-selected"))
+                        || ("*.x-grid3-row-alt".equalsIgnoreCase(rule))
+                        || ("*.x-grid3-row-selected".equalsIgnoreCase(rule))
+                        || ("*.x-grid3-row-over".equalsIgnoreCase(rule))
+                        || ("*.x-grid3-cell-selected".equalsIgnoreCase(rule))
+                        || (rule.indexOf(".x-props-grid")>=0
+                            && rule.indexOf(".x-grid3-body")>=0
+                            &&rule.indexOf("x-grid3-td-name")>=0)
                         //|| (rule.equalsIgnoreCase("*.x-grid3-hd-btn"))
                         //|| (rule.indexOf(".x-grid3-hd-inner")>=0)
 
@@ -54,7 +59,7 @@ public class BlueThemeSettings implements ThemeSettings{
                         || (rule.indexOf("x-color-menu") >=0)
 
                         || (rule.indexOf(".x-toolbar select") >=0)
-                        || (rule.equalsIgnoreCase("body"))
+                        || ("body".equalsIgnoreCase(rule))
                         || (rule.indexOf(".x-superboxselect-item-focus")>=0)
 
                         || (rule.indexOf("x-superboxselect-input")>=0)
@@ -205,7 +210,14 @@ public class BlueThemeSettings implements ThemeSettings{
     }
 
     public boolean isResizableOpacityCSSProperty(String rule, String s){
-        return false;
+        return (
+                "opacity".equalsIgnoreCase(s)
+                &&(
+                        (rule.indexOf(".x-resizable-over")>=0
+                        && rule.indexOf(".x-resizable-handle")>=0
+                        && rule.indexOf(".x-resizable-pinned")>=0
+                        && rule.indexOf(".x-resizable-handle")>=0
+                )));
     }
 
     //////////////   GIF settings
@@ -450,7 +462,13 @@ public class BlueThemeSettings implements ThemeSettings{
                 ||resourcePath.endsWith("panel/light-hd.gif")
                 ||resourcePath.endsWith("panel/top-bottom.gif")
                 ||resourcePath.endsWith("panel/corners-sprite.gif")
-                ;
+
+                ||resourcePath.endsWith("sizer/e-handle.gif")
+                ||resourcePath.endsWith("sizer/s-handle.gif")
+                ||resourcePath.endsWith("sizer/se-handle.gif")
+                ||resourcePath.endsWith("sizer/nw-handle.gif")
+                ||resourcePath.endsWith("sizer/ne-handle.gif")
+                ||resourcePath.endsWith("sizer/sw-handle.gif");
     }
 
     public boolean isBackgroundGIF(String resourcePath) {
@@ -802,7 +820,7 @@ public class BlueThemeSettings implements ThemeSettings{
 
                         //tools buttons border
                         if (
-                                resourcePath.endsWith("/tool-sprites.gif") //todo: soursce was changed
+                                resourcePath.endsWith("/tool-sprites.gif")
                                         ||resourcePath.endsWith("/tool-sprite-tpl.gif")
                                 ){
                             isBorder = true;

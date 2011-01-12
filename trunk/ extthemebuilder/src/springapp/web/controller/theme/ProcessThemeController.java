@@ -2,6 +2,7 @@ package springapp.web.controller.theme;
 
 import cesium.factory.ResourcesProcessorFactory;
 import cesium.holder.ResourcesHolder;
+import cesium.holder.ThemeParametersHolder;
 import cesium.op.ExtJSRescaleOp;
 import cesium.op.ForegroundShiftOp;
 import cesium.pool.ResourceHolderPool;
@@ -36,61 +37,27 @@ import java.util.HashMap;
 public class ProcessThemeController implements Controller {
     protected final Log logger = LogFactory.getLog(getClass());
 
+    private ResourceHolderPool holder23Pool;
     private ResourceHolderPool holderPool;
-    private ResourceHolderPool holderGrayPool;
     private ResourceHolderPool holder31Pool;
     private ResourceHolderPool holder32Pool;
+    private ResourceHolderPool holder33Pool;
+    private ResourceHolderPool holderGray23Pool;
+    private ResourceHolderPool holderGrayPool;
     private ResourceHolderPool holderGray31Pool;
     private ResourceHolderPool holderGray32Pool;
+    private ResourceHolderPool holderGray33Pool;
+
     private ResourceHolderPool holderToolsetPool;
     private ResourceHolderPool holderDrawablePool;
-
     ResourcesProcessorFactory resourcesProcessorFactory ;
 
     public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
             throws Exception {
         HttpSession session = httpServletRequest.getSession();
 
-        String templateIdString = httpServletRequest.getParameter("templateId");
-
-        String oldColorString = httpServletRequest.getParameter("oldColor");
-        String newColorString = httpServletRequest.getParameter("newColor");
-
-        String oldHeaderColorString = httpServletRequest.getParameter("oldHeaderColor");
-        String newHeaderColorString = httpServletRequest.getParameter("newHeaderColor");
-
-        String oldBgColorString = httpServletRequest.getParameter("oldBgColor");
-        String newBgColorString = httpServletRequest.getParameter("newBgColor");
-
-        String oldFontColorString = httpServletRequest.getParameter("oldFontColor");
-        String newFontColorString = httpServletRequest.getParameter("newFontColor");
-
-        String oldHeaderFontColorString = httpServletRequest.getParameter("oldHeaderFontColor");
-        String newHeaderFontColorString = httpServletRequest.getParameter("newHeaderFontColor");
-
-        String familyHeaderFont = httpServletRequest.getParameter("familyHeaderFont");
-        
-        String weightHeaderFont = httpServletRequest.getParameter("weightHeaderFont");
-        String sizeHeaderFontString = httpServletRequest.getParameter("sizeHeaderFont");
-
-        String familyFont = httpServletRequest.getParameter("familyFont");
-
-        String weightFont = httpServletRequest.getParameter("weightFont");
-        String sizeFontString = httpServletRequest.getParameter("sizeFont");
-
-        String oldBorderColorString = httpServletRequest.getParameter("oldBorderColor");
-        String newBorderColorString = httpServletRequest.getParameter("newBorderColor");
-
-        String oldTranspString = httpServletRequest.getParameter("oldTransp");
-        String newTranspString = httpServletRequest.getParameter("newTransp");
-
-        String toolsetName = httpServletRequest.getParameter("toolsetName");
-
-        String versionString = httpServletRequest.getParameter("version");
-        String version = (null==versionString)?"3.2":versionString;
-
-        byte templateId;
-        templateId = null!=templateIdString?Byte.parseByte(templateIdString):0;
+        String templateIdString = httpServletRequest.getParameter(ApplicationConstants.TEMPLATE_ID);
+        byte templateId = 0;
 
         int oldColor=0;
         int newColor=0;
@@ -108,7 +75,67 @@ public class ProcessThemeController implements Controller {
         int newTransp=0;
         byte sizeHeaderFontDiff =11;
         byte sizeFontDiff =11;
+
+        ThemeParametersHolder themeParametersHolder = null;
+        String toolsetName = httpServletRequest.getParameter(ApplicationConstants.TOOLSET_NAME);
+
+        String versionString = httpServletRequest.getParameter(ApplicationConstants.VERSION);
+        String version = (null==versionString)?ApplicationConstants.DEFAULT_EXTJS_VERSION:versionString;
+        String familyHeaderFont = httpServletRequest.getParameter(ApplicationConstants.FAMILY_HEADER_FONT);
+        String familyFont = httpServletRequest.getParameter(ApplicationConstants.FAMILY_FONT);
+        String weightHeaderFont = httpServletRequest.getParameter(ApplicationConstants.WEIGHT_HEADER_FONT);
+        String weightFont = httpServletRequest.getParameter(ApplicationConstants.WEIGHT_FONT);
         try{
+            templateId = null!=templateIdString?Byte.parseByte(templateIdString):0;
+
+            String oldColorString = (0==templateId)?"#DFE8F6":"#F1F1F1";
+            String newColorString = httpServletRequest.getParameter(ApplicationConstants.NEW_COLOR);
+
+            String oldHeaderColorString = (0==templateId)?"#CDDEF3":"#D7D7D7";
+            String newHeaderColorString = httpServletRequest.getParameter(ApplicationConstants.NEW_HEADER_COLOR);
+
+            String oldBgColorString = "#FFFFFF";
+            String newBgColorString = httpServletRequest.getParameter(ApplicationConstants.NEW_BG_COLOR);
+
+            String oldFontColorString = "#000000";
+            String newFontColorString = httpServletRequest.getParameter(ApplicationConstants.NEW_FONT_COLOR);
+
+            String oldHeaderFontColorString = (0==templateId)?"#15428B":"#222222";
+            String newHeaderFontColorString = httpServletRequest.getParameter(ApplicationConstants.NEW_HEADER_FONT_COLOR);
+
+
+            String sizeHeaderFontString = httpServletRequest.getParameter(ApplicationConstants.SIZE_HEADER_FONT);
+
+
+            String sizeFontString = httpServletRequest.getParameter(ApplicationConstants.SIZE_FONT);
+
+            String oldBorderColorString = (0==templateId)?"#99BBE8":"#D0D0D0";
+            String newBorderColorString = httpServletRequest.getParameter(ApplicationConstants.NEW_BORDER_COLOR);
+
+            String oldTranspString = "255";
+            String newTranspString = httpServletRequest.getParameter(ApplicationConstants.NEW_TRANSP);
+
+
+
+            themeParametersHolder = new ThemeParametersHolder(
+                    templateIdString ,
+                    newColorString,
+                    newHeaderColorString ,
+                    newBgColorString ,
+                    newFontColorString ,
+                    newHeaderFontColorString ,
+                    familyHeaderFont ,
+                    weightHeaderFont,
+                    sizeHeaderFontString ,
+                    familyFont ,
+                    weightFont ,
+                    sizeFontString ,
+                    newBorderColorString ,
+                    newTranspString ,
+                    toolsetName ,
+                    version );
+
+
             oldColor = null!=oldColorString?Integer.parseInt(oldColorString.replaceFirst("#",""), 16):0;
             newColor = null!=newColorString?Integer.parseInt(newColorString.replaceFirst("#",""), 16):0;
             oldHeaderColor = null!=oldHeaderColorString?Integer.parseInt(oldHeaderColorString.replaceFirst("#",""), 16):0;
@@ -305,11 +332,11 @@ public class ProcessThemeController implements Controller {
         //end operation  definition
 
         //get toolset holder
-        ResourceHolderPool holderToolsetPool = this.getHolderToolsetPool();
+        ResourceHolderPool holderToolsetPool = this.holderToolsetPool;
         ResourcesHolder toolsetSchemaHolder = holderToolsetPool.checkOut();
         //
         //get drawable holder
-        ResourceHolderPool holderDrawablePool = this.getHolderDrawablePool();
+        ResourceHolderPool holderDrawablePool = this.holderDrawablePool;
         ResourcesHolder drawableSchemaHolder = holderDrawablePool.checkOut();
         //
 /*        process(processor, templateId, schemaHolder, brightenOp, foregroundOp, liteOp, bgOp,
@@ -321,7 +348,7 @@ public class ProcessThemeController implements Controller {
         if (!"3.2".equals(version)){*/
             schemaHolder = getResourcesHolderForProcessing(templateId, version);
             processor = resourcesProcessorFactory.getResourcesProcessor(schemaHolder, context);
-            process(processor, templateId, schemaHolder, brightenOp, foregroundOp, liteOp, bgOp,
+        process(processor, themeParametersHolder, templateId, schemaHolder, brightenOp, foregroundOp, liteOp, bgOp,
                     fontOp, transparencyOp, session, borderOp, affineTransformOp, headerFontOp,
                     shadowTransparencyOp, headerOp, toolsetSchemaHolder,
                     toolsetName, familyHeaderFont, weightHeaderFont, sizeHeaderFontDiff,
@@ -346,18 +373,22 @@ public class ProcessThemeController implements Controller {
     protected ResourcesHolder getResourcesHolderForProcessing(byte themeTemplateId, String version){
         ResourceHolderPool resourceHolderPool=null;
         if ("3.0".equals(version)){
-            resourceHolderPool = 1==themeTemplateId?this.getHolderGrayPool():this.getHolderPool();
+            resourceHolderPool = 1==themeTemplateId? this.holderGrayPool: this.holderPool;
         }else if ("3.1".equals(version)){
-            resourceHolderPool = 1==themeTemplateId?this.getHolderGray31Pool():this.getHolder31Pool();
+            resourceHolderPool = 1==themeTemplateId? this.holderGray31Pool: this.holder31Pool;
+        }else if ("3.2".equals(version)){
+            resourceHolderPool = 1==themeTemplateId? this.holderGray32Pool: this.holder32Pool;
+        }else if ("2.3".equals(version)){
+            resourceHolderPool = 1==themeTemplateId? this.holderGray23Pool: this.holder23Pool;
         }else {
-            resourceHolderPool = 1==themeTemplateId?this.getHolderGray32Pool():this.getHolder32Pool();
+            resourceHolderPool = 1==themeTemplateId? this.holderGray33Pool: this.holder33Pool;
         }  
 
         return resourceHolderPool.checkOut();
     }
 
     protected void process(ResourcesProcessor processor
-            , byte themeTemplateId, ResourcesHolder schemaHolder, ExtJSRescaleOp brightenOp
+            , ThemeParametersHolder themeParametersHolder, byte themeTemplateId, ResourcesHolder schemaHolder, ExtJSRescaleOp brightenOp
             , ForegroundShiftOp foregroundOp, ExtJSRescaleOp liteOp
             , ExtJSRescaleOp bgOp, ExtJSRescaleOp fontOp
             , ExtJSRescaleOp transparencyOp, HttpSession session
@@ -368,24 +399,27 @@ public class ProcessThemeController implements Controller {
             , String familyFont, String weightFont, byte sizeFontDiff
             , ResourcesHolder drawableSchemaHolder, String version){
 
-        ResourcesHolder resultHolder = processor.process(schemaHolder, (ExtJSRescaleOp)brightenOp,
+        ResourcesHolder resultHolder = processor.process(schemaHolder, themeParametersHolder, (ExtJSRescaleOp)brightenOp,
                 (ForegroundShiftOp)foregroundOp, (ExtJSRescaleOp)liteOp, (ExtJSRescaleOp)bgOp,
                 (ExtJSRescaleOp)fontOp, transparencyOp, borderOp,
                 (AffineTransformOp) affineTransformOp, (ExtJSRescaleOp) headerFontOp,
                 shadowTransparencyOp, headerOp, toolsetSchemaHolder, toolsetName
                 , familyHeaderFont, weightHeaderFont, sizeHeaderFontDiff, familyFont, weightFont, sizeFontDiff,
                 drawableSchemaHolder);
-
         ResourceHolderPool resourceHolderPool=null;
-        ResourceHolderPool holderToolsetPool=this.getHolderToolsetPool();
-        ResourceHolderPool holderDrawablePool=this.getHolderDrawablePool();
+        ResourceHolderPool holderToolsetPool= this.holderToolsetPool;
+        ResourceHolderPool holderDrawablePool= this.holderDrawablePool;
 
         if ("3.0".equals(version)){
-            resourceHolderPool = 1==themeTemplateId?this.getHolderGrayPool():this.getHolderPool();
+            resourceHolderPool = 1==themeTemplateId? this.holderGrayPool: this.holderPool;
         }else if ("3.1".equals(version)){
-            resourceHolderPool = 1==themeTemplateId?this.getHolderGray31Pool():this.getHolder31Pool();
+            resourceHolderPool = 1==themeTemplateId? this.holderGray31Pool: this.holder31Pool;
+        }else if ("3.2".equals(version)){
+            resourceHolderPool = 1==themeTemplateId? this.holderGray32Pool: this.holder32Pool;
+        }else if ("2.3".equals(version)){
+            resourceHolderPool = 1==themeTemplateId? this.holderGray23Pool: this.holder23Pool;
         }else {
-            resourceHolderPool = 1==themeTemplateId?this.getHolderGray32Pool():this.getHolder32Pool();
+            resourceHolderPool = 1==themeTemplateId? this.holderGray33Pool: this.holder33Pool;
         }  
 
         resourceHolderPool.checkIn(schemaHolder);//return holder to pool of unlocked
@@ -458,5 +492,37 @@ public class ProcessThemeController implements Controller {
 
     public void setHolder32Pool(ResourceHolderPool holder32Pool) {
         this.holder32Pool = holder32Pool;
+    }
+
+    public void setHolder33Pool(ResourceHolderPool holder33Pool) {
+        this.holder33Pool=holder33Pool;
+    }
+
+    public ResourceHolderPool getHolder33Pool() {
+        return holder33Pool;
+    }
+
+    public void setHolderGray33Pool(ResourceHolderPool holderGray33Pool) {
+        this.holderGray33Pool=holderGray33Pool;
+    }
+
+    public ResourceHolderPool getHolderGray33Pool() {
+        return holderGray33Pool;
+    }
+
+    public void setHolder23Pool(ResourceHolderPool holder23Pool) {
+        this.holder23Pool = holder23Pool;
+    }
+
+    public ResourceHolderPool getHolder23Pool() {
+        return holder23Pool;
+    }
+
+    public void setHolderGray23Pool(ResourceHolderPool holderGray23Pool) {
+        this.holderGray23Pool = holderGray23Pool;
+    }
+
+    public ResourceHolderPool getHolderGray23Pool() {
+        return holderGray23Pool;
     }
 }

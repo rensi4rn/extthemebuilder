@@ -21,9 +21,13 @@ public interface ResourcesHolder extends Map {
 
     public String getResourcesPath();
 
+    public int getResourcesPathHashCode();
+
     public void setResourcesPath(String path);
 
     public ResourcesHolder findResourceByPath(String resourcePath);
+
+    public ResourcesHolder findResourceByPathHashCode(Integer hashCode);
 
     public ResourcesHolder findFirstCSSResource();
 
@@ -36,4 +40,8 @@ public interface ResourcesHolder extends Map {
     public boolean isDrawable();
     
     public boolean isDrawableColorIndependent();
+
+    void setThemeParametersHolder(ThemeParametersHolder themeParametersHolder);
+
+    public ThemeParametersHolder getThemeParametersHolder();
 }

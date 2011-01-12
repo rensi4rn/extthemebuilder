@@ -29,7 +29,7 @@ public class CSSHolderImpl extends AbstractResourcesHolder implements CSSHolder{
 
     public CSSHolderImpl(InputStream resource, String resourcePath) {
         this.resource = resource;
-        setResourcesPath(resourcePath);
+        resourcesPath = resourcePath;
     }
 
     public InputStream getResource() {
@@ -41,15 +41,15 @@ public class CSSHolderImpl extends AbstractResourcesHolder implements CSSHolder{
     }
 
     public Object getContent() {
-        return this.getResource();
+        return this.resource;
     }
 
     public void setContent(Object obj) {
-        this.setResource((InputStream)obj);
+        this.resource = (InputStream) obj;
     }
 
     public String getResourceName() {
-        String path = getResourcesPath();
+        String path = resourcesPath;
         String result = null;
         int pointIndex = path.lastIndexOf(".");
         int slashIndex = path.lastIndexOf("/");

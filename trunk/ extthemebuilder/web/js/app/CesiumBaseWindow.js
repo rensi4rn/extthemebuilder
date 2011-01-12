@@ -5,7 +5,7 @@ Ext.ux.MyApp.CesiumBaseWindow = Ext.extend(Ext.Window, {
     layout:'fit',
     width:500,
     height:500,
-    maximizible:true,
+    maximizable:true,
     minimizable:true,
     collapsible:true,
     shim:false,
@@ -15,10 +15,8 @@ Ext.ux.MyApp.CesiumBaseWindow = Ext.extend(Ext.Window, {
     closable: true,
     resizable: true,
     iconCls:'window-icon',
-    //plain: false,
     footer:false,
-    constrain:true/*,
-    border: true*/,
+    constrainHeader:true,
     
     initComponent: function(){
         // Called during component initialization
@@ -51,7 +49,6 @@ Ext.ux.MyApp.CesiumBaseWindow = Ext.extend(Ext.Window, {
          });
 
         this.addListener('activate', function( th ){
-            //var myBtn = myView.getTaskButtonByIdWin(th.id);
             if (th.maximized){th.maximize()}
             var myBtn = th.mybtn;
             if (myBtn){

@@ -24,14 +24,6 @@ createWindow : function(idWin){
 
     if ((!listWin)||(listWin==undefined)){
 
-    /*====================================================================
-     * Individual checkbox/radio examples
-     *====================================================================*/
-
-    // Using checkbox/radio groups will generally be easier and more flexible than
-    // using individual checkbox and radio controls, but this shows that you can
-    // certainly do so if you only need a single control, or if you want to control
-    // exactly where each check/radio goes within your layout.
     var individual = [{
         bodyStyle: 'padding-right:5px;',
         items: {
@@ -413,7 +405,7 @@ createWindow : function(idWin){
                 title: 'Bottom Tab 0',
                 iconCls: 'tabs',
                 html: 'Tab Body 0 <br/><br/>'
-                        + Ext.example.shortBogusMarkup,
+                        + Ext.dummy.shortBogusMarkup,
                 closable:true,
                 layout:'fit',
                 region:'center'
@@ -421,14 +413,13 @@ createWindow : function(idWin){
                 title: 'Bottom Tab 1',
                 iconCls: 'tabs',
                 html: 'Tab Body 1 <br/><br/>'
-                        + Ext.example.shortBogusMarkup,
+                        + Ext.dummy.shortBogusMarkup,
                 closable:true,
                 layout:'fit',
                 region:'center'
             }],
             border:false,
-            defaults: {autoScroll:true,layout:'border'},
-            plugins: new Ext.ux.TabCloseMenu()
+            defaults: {autoScroll:true,layout:'border'}
         });
 
         var checkBoxTab = {
@@ -476,8 +467,7 @@ createWindow : function(idWin){
 
 /*                width:'auto',
             height:250,*/
-            defaults: {autoScroll:true,layout:'border'},
-            plugins: new Ext.ux.TabCloseMenu()
+            defaults: {autoScroll:true,layout:'border'}
         });
 
         // tab generation code
@@ -488,7 +478,7 @@ createWindow : function(idWin){
                 title: 'New Tab ' + (++index),
                 iconCls: 'tabs',
                 html: 'Tab Body ' + (index) + '<br/><br/>'
-                        + Ext.example.bogusMarkup,
+                        + Ext.dummy.bogusMarkup,
                 closable:true,
                 layout:'fit',
                 region:'center'
