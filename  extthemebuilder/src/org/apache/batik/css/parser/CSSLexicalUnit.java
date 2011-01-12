@@ -9,7 +9,7 @@ public abstract class CSSLexicalUnit
         protected String value;
 
         public String toString(){
-            StringBuffer res = new StringBuffer(getStringValue());
+            StringBuilder res = new StringBuilder(value);
             res.append(" ");
             LexicalUnit unit = this.getNextLexicalUnit();
             if (null!=unit) {
@@ -35,10 +35,10 @@ public abstract class CSSLexicalUnit
 
         public String toString(){
             String result=null;
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             buffer.append(getFunctionName());
             buffer.append("(");
-            LexicalUnit unit = getParameters();
+            LexicalUnit unit = parameters;
             buffer.append(unit.toString());
             buffer.append(") ");
 
@@ -83,10 +83,10 @@ public abstract class CSSLexicalUnit
 
         public String toString(){
             String result=null;
-            StringBuffer buffer = new StringBuffer();
-            buffer.append(getFunctionName());
+            StringBuilder buffer = new StringBuilder();
+            buffer.append(name);
             buffer.append("(");
-            LexicalUnit unit = getParameters();
+            LexicalUnit unit = parameters;
             buffer.append(null!=unit?unit.toString():"");
             buffer.append(") ");
             LexicalUnit next = this.getNextLexicalUnit();
@@ -118,9 +118,9 @@ public abstract class CSSLexicalUnit
 
         public String toString(){
             String result=null;
-            StringBuffer buffer = new StringBuffer();
-            buffer.append(getFloatValue());
-            String dimUnit = getDimensionUnitText();
+            StringBuilder buffer = new StringBuilder();
+            buffer.append(value);
+            String dimUnit = dimension;
             buffer.append(null!=dimUnit?dimUnit:"");
             buffer.append(" ");
 
@@ -154,8 +154,8 @@ public abstract class CSSLexicalUnit
 
         public String toString(){
             String result=null;
-            StringBuffer buffer = new StringBuffer();
-            buffer.append(getFloatValue());
+            StringBuilder buffer = new StringBuilder();
+            buffer.append(value);
             buffer.append(" ");
             LexicalUnit next = this.getNextLexicalUnit();
             if (null!=next) {
@@ -180,8 +180,8 @@ public abstract class CSSLexicalUnit
 
         public String toString(){
             String result=null;
-            StringBuffer buffer = new StringBuffer();
-            buffer.append(getIntegerValue());
+            StringBuilder buffer = new StringBuilder();
+            buffer.append(value);
             buffer.append(" ");
             LexicalUnit next = this.getNextLexicalUnit();
             if (null!=next) {
@@ -202,7 +202,7 @@ public abstract class CSSLexicalUnit
 
     protected static class SimpleLexicalUnit extends CSSLexicalUnit {
         public String toString(){
-            StringBuffer buffer = new StringBuffer(", ");
+            StringBuilder buffer = new StringBuilder(", ");
             LexicalUnit next = this.getNextLexicalUnit();
             if (null!=next) {
                 buffer.append(next.toString());

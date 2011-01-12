@@ -2,10 +2,7 @@ package cesium.loader;
 
 import cesium.factory.ResourcesLoaderFactory;
 import cesium.handler.CSSDocHandler;
-import cesium.holder.CSSHolderImpl;
-import cesium.holder.CSSPropertyHolderImpl;
-import cesium.holder.CSSRuleHolderImpl;
-import cesium.holder.ResourcesHolder;
+import cesium.holder.*;
 import cesium.theme.settings.ThemeSettings;
 import org.apache.batik.css.parser.CSSSelectorList;
 import org.apache.batik.css.parser.CustomParser;
@@ -19,6 +16,8 @@ import org.w3c.css.sac.Selector;
 import javax.servlet.ServletContext;
 import java.io.*;
 import java.util.*;
+
+import springapp.constants.ApplicationConstants;
 
 /**
  * @project: Theme Builder for ExtJS 3.x
@@ -100,6 +99,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
                 FileWriter writer;
                 try {
                     writer = new FileWriter(cssFile);
+                    StringBuilder builder = new StringBuilder();
                     for (Iterator iterator = set.iterator(); iterator.hasNext();) {
                         Object keySelectorList = iterator.next();
                         CSSRuleHolderImpl cssRuleHolder = (CSSRuleHolderImpl)
@@ -117,7 +117,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
                             String s = (String) iterator1.next();
                             CSSPropertyHolderImpl propertyHolder = (CSSPropertyHolderImpl)
                                     cssRuleHolder.get(s);
-                            String propValue = propertyHolder.getPropertyStringValue();
+                            String propValue = propertyHolder.getPropertyStringValue(builder);
                             writer.append(s);
                             writer.append(":");
                             writer.append(propValue);
@@ -174,6 +174,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
             Set set = cssHolder.keySet();
             out = new ByteArrayOutputStream();
             try {
+                StringBuilder builder = new StringBuilder();
                 for (Iterator iterator = set.iterator(); iterator.hasNext();) {
                     Object keySelectorList = iterator.next();
                     CSSRuleHolderImpl cssRuleHolder = (CSSRuleHolderImpl)
@@ -191,7 +192,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
                         String s = (String) iterator1.next();
                         CSSPropertyHolderImpl propertyHolder = (CSSPropertyHolderImpl)
                                 cssRuleHolder.get(s);
-                        String propValue = propertyHolder.getPropertyStringValueForWeb(thisControllerUrl, resourcesPath);
+                        String propValue = propertyHolder.getPropertyStringValueForWeb(thisControllerUrl, resourcesPath, builder);
                         out.write(s.getBytes());
                         out.write(":".getBytes());
                         out.write(propValue.getBytes());
@@ -231,6 +232,8 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
             Set set = cssHolder.keySet();
             out = new ByteArrayOutputStream();
             try {
+                ThemeParametersHolder themeParametersHolder = holder.getThemeParametersHolder();
+                String params = null!=themeParametersHolder?themeParametersHolder.toString():"";
                 String fileHeader = new StringBuilder()
                         .append("/* Document   : xtheme-")
                         .append(newSchemaName).append("\n")
@@ -242,9 +245,11 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
                         .append("    email       : sergchentsov@gmail.com\n")
                         .append("    Description:\n")
                         .append("        ExtJS ")
-                        .append((null == version ) ? "3.2" : version)
+                        .append((null == version ) ? ApplicationConstants.DEFAULT_EXTJS_VERSION : version)
                         .append(" theme ")
                         .append(newSchemaName)
+                        .append(" \n")
+                        .append(params)
                         .append(" \n")
                         .append("    License    : Dual Licensed\n")
                         .append("                 1.- GNU GPL Licensed, Free of charge for any non-commercial products.\n")
@@ -252,6 +257,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
                         .append("                 Contact me for any questions or request in the email above.\n")
                         .append("*/").toString();
                 out.write(fileHeader.getBytes());
+                StringBuilder builder = new StringBuilder();
                 for (Iterator iterator = set.iterator(); iterator.hasNext();) {
                     Object keySelectorList = iterator.next();
                     CSSRuleHolderImpl cssRuleHolder = (CSSRuleHolderImpl)
@@ -269,7 +275,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
                         String s = (String) iterator1.next();
                         CSSPropertyHolderImpl propertyHolder = (CSSPropertyHolderImpl)
                                 cssRuleHolder.get(s);
-                        String propValue = propertyHolder.getPropertyStringValueForZip(newSchemaName);
+                        String propValue = propertyHolder.getPropertyStringValueForZip(newSchemaName, builder);
                         out.write(s.getBytes());
                         out.write(":".getBytes());
                         out.write(propValue.getBytes());

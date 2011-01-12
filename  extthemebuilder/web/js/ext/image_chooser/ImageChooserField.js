@@ -1,3 +1,13 @@
+/**
+ * @project: Theme Builder for ExtJS 3.x
+ * @Description: This is an Image chooser component
+ * @license: GPL_v3
+ * @author: Sergey Chentsov (extjs id: iv_ekker)
+ * @mailto: sergchentsov@gmail.com
+ * @version: 1.0.0
+ * @Date: 11.08.2009
+ * @Time: 14:31:28
+ */
 Ext.namespace("Ext.ux", "Ext.ux.form");
 
 Ext.ux.form.SimpleImageField = Ext.extend(Ext.BoxComponent,  {
@@ -528,7 +538,7 @@ Ext.ux.form.ImageTriggerField = Ext.extend(Ext.ux.form.SimpleImageField,  {
     onResize : function(w, h){
         Ext.ux.form.ImageTriggerField.superclass.onResize.call(this, w, h);
         var tw = this.getTriggerWidth();
-        if(Ext.isNumber(w)){
+        if(Ext.isNumber?Ext.isNumber(w):(w=Ext.num(w,0))){
             this.el.setWidth(w - tw);
         }
         this.wrap.setWidth(this.el.getWidth() + tw);
@@ -683,35 +693,6 @@ Ext.reg('imagetrigger', Ext.ux.form.ImageTriggerField);
 
 
 ////////////////////////////////////////////////////////////
-Ext.ux.menu.ImageMenu = Ext.extend(Ext.menu.Menu, {
-    enableScrolling : false,
-    hideOnClick     : true,
-    initComponent : function(){
-        Ext.apply(this, {
-            plain         : true,
-            showSeparator : false,
-            items: this.picker = new Ext.ux.ImagePicker(Ext.apply({
-                url:this.url,
-                style: 'width:'+(this.viewWidth?this.viewWidth:500)+'px;height:'
-                        +(this.viewHeight?this.viewHeight:400)+'px'
-            }, this.initialConfig))
-        });
-        Ext.ux.menu.ImageMenu.superclass.initComponent.call(this);
-        this.relayEvents(this.picker, ['select','hideMenu']);
-        this.on('select', this.menuHide, this);
-        this.on('hideMenu', this.menuHide, this);
-        if (this.handler) {
-            this.on('select', this.handler, this.scope || this)
-        }
-    },
-    menuHide: function(){
-        if (this.hideOnClick) {
-            this.hide(true);
-        }
-    }
-});
-
-////////////////////////////////////////////////////////////
 Ext.ux.form.ImagePickerField = Ext.extend(Ext.ux.form.ImageTriggerField,  {
 
     initComponent : function(){
@@ -720,6 +701,7 @@ Ext.ux.form.ImagePickerField = Ext.extend(Ext.ux.form.ImageTriggerField,  {
             viewWidth:this.viewWidth,
             viewHeight:this.viewHeight,
             url:this.url,
+            defaultUrl:this.defaultUrl,
             listeners : {
                 select: function(m, c){
                     this.focus(this);
@@ -772,6 +754,7 @@ Ext.reg("imagepickerfield", Ext.ux.form.ImagePickerField);
 
 //////////////////////////////////////////////////////
 Ext.ux.ImagePicker = Ext.extend( Ext.Container, {
+    defaultUrl:null,
     /**
      *
      */
@@ -801,7 +784,15 @@ Ext.ux.ImagePicker = Ext.extend( Ext.Container, {
     additionalInit :function(){
         this.store = new Ext.data.JsonStore({
             url: this.url,
+            callbackName:'cbFn',
             root: 'images',
+            autoDestroy:true,
+            proxy: new Ext.data.HttpProxy({
+                callbackName:'cbFn',
+                method: 'GET',
+                prettyUrls: false,
+                url: this.url
+            }),
             fields: [
                 'name', 'url', 'value',
                 {name:'size', type: 'float'},
@@ -811,7 +802,8 @@ Ext.ux.ImagePicker = Ext.extend( Ext.Container, {
                 'load': {fn:function(){ this.selectActiveImage();this.showDetails() }, scope:this, single:true}
             }
         });
-
+        this.cbFn=function(a,b,c){
+        };
         this.showDetails = function(){
             var selNode = this.view.getSelectedNodes();
             var detailEl = Ext.getCmp('img-detail-panel').body;
@@ -832,7 +824,7 @@ Ext.ux.ImagePicker = Ext.extend( Ext.Container, {
             var selNode = this.view.getSelectedNodes()[0];
             var lookup = this.lookup;
             if(selNode){
-                this.fireEvent('select', this, lookup[selNode.id].url);
+                this.fireEvent('select', this, this.defaultUrl+'/'+lookup[selNode.id].url);
             }
         };
 
@@ -886,7 +878,7 @@ Ext.ux.ImagePicker = Ext.extend( Ext.Container, {
         this.thumbTemplate = new Ext.XTemplate(
                 '<tpl for=".">',
                 '<div class="thumb-wrap" id="{name}">',
-                '<div class="thumb"><img src="{url}" title="{name}"></div>',
+                '<div class="thumb"><img src="' + this.defaultUrl + '{url}" title="{name}"></div>',
                 '<span>{shortName}</span></div>',
                 '</tpl>'
                 );
@@ -895,7 +887,7 @@ Ext.ux.ImagePicker = Ext.extend( Ext.Container, {
         this.detailsTemplate = new Ext.XTemplate(
                 '<div class="details">',
                 '<tpl for=".">',
-                '<img src="{url}"><div class="details-info">',
+                '<img src="' + this.defaultUrl + '{url}"><div class="details-info">',
                 '<b>Toolset Name:</b>',
                 '<span>{name}</span>',
                 '</tpl>',
@@ -1005,6 +997,74 @@ Ext.ux.ImagePicker = Ext.extend( Ext.Container, {
     }
 
 });
+
+////////////////////////////////////////////////////////////
+Ext.namespace("Ext.ux.menu");
+if (Ext.menu.Menu.superclass.initComponent){
+
+    Ext.ux.menu.ImageMenu = Ext.extend(Ext.menu.Menu, {
+        enableScrolling : false,
+        hideOnClick     : true,
+        initComponent : function(){
+            Ext.apply(this, {
+                plain         : true,
+                showSeparator : false,
+                items: this.picker = new Ext.ux.ImagePicker(Ext.apply({
+                    url:this.url,
+                    defaultUrl:this.defaultUrl,
+                    style: 'width:'+(this.viewWidth?this.viewWidth:500)+'px;height:'
+                            +(this.viewHeight?this.viewHeight:400)+'px'
+                }, this.initialConfig))
+            });
+            Ext.ux.menu.ImageMenu.superclass.initComponent.call(this);
+            this.relayEvents(this.picker, ['select','hideMenu']);
+            this.on('select', this.menuHide, this);
+            this.on('hideMenu', this.menuHide, this);
+            if (this.handler) {
+                this.on('select', this.handler, this.scope || this)
+            }
+        },
+        menuHide: function(){
+            if (this.hideOnClick) {
+                this.hide(true);
+            }
+        }
+    });
+}else{
+        Ext.ux.menu.ImageItem = function(config){
+        if(!config)config={};
+        config.style='width:'+(config.viewWidth?config.viewWidth:500)+'px;height:'
+                            +(config.viewHeight?config.viewHeight:400)+'px';
+        Ext.ux.menu.ImageItem.superclass.constructor.call(this, new Ext.ux.ImagePicker(config), config);
+        this.picker = this.component;
+        this.addEvents('select');
+        this.picker.on("render", function(picker){
+            picker.getEl().swallowEvent("click");
+        });
+        this.picker.on("select", this.onSelect, this);
+    };
+    Ext.extend(Ext.ux.menu.ImageItem, Ext.menu.Adapter, {
+        // private
+        onSelect : function(picker, color){
+            this.fireEvent("select", this, color, picker);
+            Ext.ux.menu.ImageItem.superclass.handleClick.call(this);
+        }
+    });
+
+    Ext.ux.menu.ImageMenu = function(config){
+        Ext.ux.menu.ImageMenu.superclass.constructor.call(this, config);
+        this.plain = true;
+        var ci = new Ext.ux.menu.ImageItem(config);
+        this.add(ci);
+        this.picker = ci.picker;
+        this.relayEvents(ci, ['select','hideMenu']);
+    };
+    Ext.extend(Ext.ux.menu.ImageMenu, Ext.menu.Menu, {
+        beforeDestroy : function() {
+            this.picker.destroy();
+        }
+    });
+}
 
 String.prototype.ellipse = function(maxLength){
     if(this.length > maxLength){

@@ -1,14 +1,3 @@
-/*!
- * Ext JS Library 3.0.3
- * Copyright(c) 2006-2009 Ext JS, LLC
- * licensing@extjs.com
- * http://www.extjs.com/license
- */
-/**
- * @class Ext.ux.Spinner
- * @extends Ext.util.Observable
- * Creates a Spinner control utilized by Ext.ux.form.SpinnerField
- */
 Ext.ux.Spinner = Ext.extend(Ext.util.Observable, {
     incrementValue: 1,
     alternateIncrementValue: 5,

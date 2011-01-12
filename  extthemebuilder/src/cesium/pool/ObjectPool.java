@@ -24,7 +24,7 @@ public abstract class ObjectPool<T> {
         unlocked = new Hashtable<T, Long>();
     }*/
 
-    public ObjectPool(long expirationTime) {
+    protected ObjectPool(long expirationTime) {
         this.expirationTime = expirationTime;
 
         locked = new Hashtable<T, Long>();
@@ -40,7 +40,7 @@ public abstract class ObjectPool<T> {
     public synchronized T checkOut() {
         long now = System.currentTimeMillis();
         T t;
-        if (unlocked.size() > 0) {
+        if (!unlocked.isEmpty()) {
             Enumeration<T> e = unlocked.keys();
             while (e.hasMoreElements()) {
                 t = e.nextElement();
@@ -75,4 +75,10 @@ public abstract class ObjectPool<T> {
         unlocked.put(t, null!=aLong?aLong:0L);
     }
 
+    public synchronized int getCapacity(){
+        int result = 0;
+        result += null!=this.locked?this.locked.size():0;
+        result += null!=this.unlocked?this.unlocked.size():0;
+        return result;
+    }
 }

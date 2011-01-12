@@ -4,6 +4,7 @@ import cesium.factory.ResourcesProcessorFactoryImpl;
 import cesium.holder.AbstractResourcesHolder;
 import cesium.holder.GIFHolderImpl;
 import cesium.holder.ResourcesHolder;
+import cesium.holder.ThemeParametersHolder;
 import cesium.op.ExtJSRescaleOp;
 import cesium.op.ForegroundShiftOp;
 import com.sun.imageio.plugins.gif.GIFImageReader;
@@ -44,7 +45,7 @@ public class GIFProcessorImpl extends AbstractImageProcessor {
     }
 
     public ResourcesHolder process(ResourcesHolder resHolder,
-                                   ExtJSRescaleOp brightenOp,
+                                   ThemeParametersHolder themeParametersHolder, ExtJSRescaleOp brightenOp,
                                    ForegroundShiftOp foregroundOp,
                                    ExtJSRescaleOp liteOp,
                                    ExtJSRescaleOp bgOp, ExtJSRescaleOp fontOp,
@@ -66,7 +67,7 @@ public class GIFProcessorImpl extends AbstractImageProcessor {
         //end processing exclusion
 
         ResourcesHolder newResourcesHolder = super.process(resHolder,
-                brightenOp, foregroundOp, liteOp, bgOp, fontOp, transparencyOp, borderOp
+                themeParametersHolder, brightenOp, foregroundOp, liteOp, bgOp, fontOp, transparencyOp, borderOp
                 , (AffineTransformOp) affineTransformOp, headerFontOp, shadowTransparencyOp
                 , headerOp, toolsetSchemaHolder, toolsetName, familyHeaderFont, weightHeaderFont, sizeHeaderFont
                 , familyFont, weightFont, sizeFont, drawableSchemaHolder);
@@ -85,7 +86,7 @@ public class GIFProcessorImpl extends AbstractImageProcessor {
             if (null!=resourceByPath)
                 data = (byte[]) resourceByPath.getContent();
             else
-                data = (byte[]) resHolder.getContent();  //todo: sc throw exception res not found
+                data = (byte[]) resHolder.getContent();
         }else{
             data = (byte[]) resHolder.getContent();
         }
@@ -94,6 +95,7 @@ public class GIFProcessorImpl extends AbstractImageProcessor {
         BufferedImage image = null;
 
         try {
+            ImageIO.setUseCache(false);
 
             byte[] drawableData=null;
             ByteArrayInputStream dis = null;

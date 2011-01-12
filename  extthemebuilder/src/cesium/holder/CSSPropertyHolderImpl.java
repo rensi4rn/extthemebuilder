@@ -132,46 +132,49 @@ public class CSSPropertyHolderImpl extends AbstractResourcesHolder implements Pr
     }
 
     public Object getContent() {
-        return this.getLexicalUnit();
+        return this.lexicalUnit;
     }
 
     public void setContent(Object obj) {
-        this.setLexicalUnit( (LexicalUnit) obj);
+        this.lexicalUnit = (LexicalUnit) obj;
     }
 
-    public String getPropertyStringValue() {
+    public String getPropertyStringValue(StringBuilder builder) {
         String propValue = null;
         LexicalUnit lxUnit = (LexicalUnit) getContent();
         short lexicalUnitType = lxUnit.getLexicalUnitType();
         if (lexicalUnitType == LexicalUnit.SAC_URI){
-            propValue = "url("+lxUnit.getStringValue()+"?rnd="+Math.random()+")"+(isImportant?" !important":"");
+            propValue = builder.append("url(").append(lxUnit.getStringValue())
+                    .append("?rnd=").append(Math.random()).append(")").append(isImportant ? " !important" : "").toString();
+            builder.setLength(0);
         } else{
             propValue = getCommonPropertyStringValue(lxUnit);
         }
         return propValue;
     }
 
-    public String getPropertyStringValueForWeb(String thisControllerUrl, String resourcesPath) {
+    public String getPropertyStringValueForWeb(String thisControllerUrl, String resourcesPath, StringBuilder builder) {
         String propValue = null;
         LexicalUnit lxUnit = (LexicalUnit) getContent();
         short lexicalUnitType = lxUnit.getLexicalUnitType();
         if (lexicalUnitType == LexicalUnit.SAC_URI){
-            propValue = "url("+thisControllerUrl+"?resourcePath="
-                    +resourcesPath+lxUnit.getStringValue().replaceFirst("..","")
-                    +"&rnd="+Math.random()+")"+(isImportant?" !important":"");
+            propValue = builder.append("url(").append(thisControllerUrl)
+                    .append("?resourcePath=").append((resourcesPath + lxUnit.getStringValue().replaceFirst("..", "")).hashCode())
+                    .append("&rnd=").append(Math.random()).append(")").append(isImportant ? " !important" : "").toString();
+            builder.setLength(0);
         }else{
             propValue = getCommonPropertyStringValue(lxUnit);
         }
         return propValue;
     }
 
-    public String getPropertyStringValueForZip(String newSchemaName) {
+    public String getPropertyStringValueForZip(String newSchemaName, StringBuilder builder) {
         String propValue = null;
         LexicalUnit lxUnit = (LexicalUnit) getContent();
         short lexicalUnitType = lxUnit.getLexicalUnitType();
         if (lexicalUnitType == LexicalUnit.SAC_URI){
-            propValue = "url("+lxUnit.getStringValue().replaceFirst("default",newSchemaName)
-                    +")"+(isImportant?" !important":"");
+            propValue = builder.append("url(").append(lxUnit.getStringValue().replaceFirst("default", newSchemaName)).append(")").append(isImportant ? " !important" : "").toString();
+            builder.setLength(0);
         }else{
             propValue = getCommonPropertyStringValue(lxUnit);
         }

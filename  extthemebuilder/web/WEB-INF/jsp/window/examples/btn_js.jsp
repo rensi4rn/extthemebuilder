@@ -32,7 +32,7 @@ createWindow : function(idWin){
     });
 
     var htmlEditor = new Ext.form.HtmlEditor({
-        value: Ext.example.shortBogusMarkup,
+        value: Ext.dummy.shortBogusMarkup,
         name:'paramsHtmlEditor'
         ,xtype: 'htmleditor'
         , grow:true
@@ -107,7 +107,7 @@ createWindow : function(idWin){
             id:idWin,
             width:630,
             height:400,
-            title:'Buttons',
+            title:'Buttons example',
             manager:windows,
             layout:'fit',
             region:'center',

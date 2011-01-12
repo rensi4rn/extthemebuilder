@@ -2,6 +2,7 @@ package cesium.processor;
 
 import cesium.factory.ResourcesProcessorFactoryImpl;
 import cesium.holder.ResourcesHolder;
+import cesium.holder.ThemeParametersHolder;
 import cesium.op.ExtJSRescaleOp;
 import cesium.op.ForegroundShiftOp;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +28,7 @@ public class CSSProcessorImpl extends AbstractResourcesProcessor{
         this.setResourcesProcessorFactory(resourcesProcessorFactory);
     }
 
-    public ResourcesHolder process(ResourcesHolder resHolder, ExtJSRescaleOp brightenOp,
+    public ResourcesHolder process(ResourcesHolder resHolder, ThemeParametersHolder themeParametersHolder, ExtJSRescaleOp brightenOp,
                                    ForegroundShiftOp foregroundOp, ExtJSRescaleOp liteOp,
                                    ExtJSRescaleOp bgOp, ExtJSRescaleOp fontOp, ExtJSRescaleOp transparencyOp,
                                    ExtJSRescaleOp borderOp, AffineTransformOp affineTransformOp,
@@ -35,7 +36,7 @@ public class CSSProcessorImpl extends AbstractResourcesProcessor{
                                    ExtJSRescaleOp headerOp, ResourcesHolder toolsetSchemaHolder, String toolsetName,
                                    String familyHeaderFont, String weightHeaderFont, byte sizeHeaderFont,
                                    String familyFont, String weightFont, byte sizeFont, ResourcesHolder drawableSchemaHolder) {
-        ResourcesHolder holder = super.process(resHolder, brightenOp, foregroundOp, liteOp, bgOp, fontOp,
+        ResourcesHolder holder = super.process(resHolder, themeParametersHolder, brightenOp, foregroundOp, liteOp, bgOp, fontOp,
                 transparencyOp, borderOp, affineTransformOp, headerFontOp,
                 shadowTransparencyOp, headerOp, toolsetSchemaHolder, toolsetName,
                 familyHeaderFont, weightHeaderFont, sizeHeaderFont,
@@ -61,7 +62,7 @@ public class CSSProcessorImpl extends AbstractResourcesProcessor{
             }
 */
         }
-
+        holder.setThemeParametersHolder(themeParametersHolder);
         return holder;
     }
 }

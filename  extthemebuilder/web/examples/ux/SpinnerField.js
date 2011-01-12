@@ -1,17 +1,5 @@
-/*!
- * Ext JS Library 3.0.3
- * Copyright(c) 2006-2009 Ext JS, LLC
- * licensing@extjs.com
- * http://www.extjs.com/license
- */
 Ext.ns('Ext.ux.form');
 
-/**
- * @class Ext.ux.form.SpinnerField
- * @extends Ext.form.NumberField
- * Creates a field utilizing Ext.ux.Spinner
- * @xtype spinnerfield
- */
 Ext.ux.form.SpinnerField = Ext.extend(Ext.form.NumberField, {
     actionMode: 'wrap',
     deferHeight: true,
@@ -20,7 +8,8 @@ Ext.ux.form.SpinnerField = Ext.extend(Ext.form.NumberField, {
     adjustSize: Ext.BoxComponent.prototype.adjustSize,
 
 	constructor: function(config) {
-		var spinnerConfig = Ext.copyTo({}, config, 'incrementValue,alternateIncrementValue,accelerate,defaultValue,triggerClass,splitterClass');
+        var cp = Ext.copyTo?Ext.copyTo:Ext.apply;
+        var spinnerConfig = cp({}, config, 'incrementValue,alternateIncrementValue,accelerate,defaultValue,triggerClass,splitterClass');
 
 		var spl = this.spinner = new Ext.ux.Spinner(spinnerConfig);
 

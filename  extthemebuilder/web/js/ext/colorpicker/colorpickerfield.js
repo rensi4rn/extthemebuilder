@@ -8,6 +8,8 @@ Ext.apply(Ext.form.VTypes, {
    colorMask:/[a-f0-9#]/i
 });
 
+if (Ext.menu.Menu.superclass.initComponent){
+
 Ext.ux.menu.ColorMenu = Ext.extend(Ext.menu.Menu, {
 	enableScrolling : false,
 	hideOnClick     : true,
@@ -32,7 +34,41 @@ Ext.ux.menu.ColorMenu = Ext.extend(Ext.menu.Menu, {
 		}
 	}
 });
+}else{
+    Ext.ux.menu.ColorItem = function(config){
+        if(!config)config={};
+        config.style="width:350px;";
+        Ext.ux.menu.ColorItem.superclass.constructor.call(this, new Ext.ux.ColorPicker(config), config);
+        this.picker = this.component;
+        this.addEvents('select');
+        this.picker.on("render", function(picker){
+            picker.getEl().swallowEvent("click");
+        });
+        this.picker.on("select", this.onSelect, this);
+    };
+    Ext.extend(Ext.ux.menu.ColorItem, Ext.menu.Adapter, {
+        // private
+        onSelect : function(picker, color){
+            this.fireEvent("select", this, color, picker);
+            Ext.ux.menu.ColorItem.superclass.handleClick.call(this);
+        }
+    });
 
+    Ext.ux.menu.ColorMenu = function(config){
+        Ext.ux.menu.ColorMenu.superclass.constructor.call(this, config);
+        this.plain = true;
+        var ci = new Ext.ux.menu.ColorItem(config);
+        this.add(ci);
+        this.picker = ci.picker;
+        this.relayEvents(ci, ["select"]);
+    };
+    Ext.extend(Ext.ux.menu.ColorMenu, Ext.menu.Menu, {
+        beforeDestroy : function() {
+            this.picker.destroy();
+        }
+    });
+
+}
 Ext.ux.form.ColorPickerField = Ext.extend(Ext.form.TriggerField,  {
     initComponent : function(){
         Ext.ux.form.ColorPickerField.superclass.initComponent.call(this);
@@ -55,6 +91,9 @@ Ext.ux.form.ColorPickerField = Ext.extend(Ext.form.TriggerField,  {
         } else {
             this.el.applyStyles('background: #ffffff; color: #000000;');
         }
+    }
+    ,isValid : function(v){
+        Ext.ux.form.ColorPickerField.superclass.isValid.apply(this, arguments);
     }
     ,onDestroy : function(){
         if(this.menu) {

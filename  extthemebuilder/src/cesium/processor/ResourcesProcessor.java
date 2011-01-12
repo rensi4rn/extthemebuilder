@@ -2,6 +2,7 @@ package cesium.processor;
 
 import cesium.factory.ResourcesProcessorFactoryImpl;
 import cesium.holder.ResourcesHolder;
+import cesium.holder.ThemeParametersHolder;
 import cesium.op.ExtJSRescaleOp;
 import cesium.op.ForegroundShiftOp;
 import org.springframework.context.ApplicationContext;
@@ -21,7 +22,7 @@ import java.awt.image.BufferedImageOp;
  */
 public interface ResourcesProcessor {
     public ResourcesHolder process(ResourcesHolder resHolder,
-                                   ExtJSRescaleOp brightenOp,
+                                   ThemeParametersHolder themeParametersHolder, ExtJSRescaleOp brightenOp,
                                    ForegroundShiftOp foregroundOp,
                                    ExtJSRescaleOp liteOp, ExtJSRescaleOp bgOp,
                                    ExtJSRescaleOp fontOp, ExtJSRescaleOp transparencyOp,

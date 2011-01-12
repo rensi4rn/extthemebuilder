@@ -36,12 +36,12 @@ public class DownloadController implements Controller {
     public ModelAndView handleRequest(HttpServletRequest httpServletRequest,
                                       HttpServletResponse httpServletResponse) throws Exception {
 
-        String templateIdString = httpServletRequest.getParameter("templateId");
+        String templateIdString = httpServletRequest.getParameter(ApplicationConstants.TEMPLATE_ID);
 
         byte templateId = null!=templateIdString?Byte.parseByte(templateIdString):0;
         String templateName = templateId==0?"blue":"gray";
 
-        String shemaNameParam = httpServletRequest.getParameter("newSchemaName");
+        String shemaNameParam = httpServletRequest.getParameter(ApplicationConstants.NEW_SCHEMA_NAME);
         String newSchemaName = (null!=shemaNameParam)&&(!"".equals(shemaNameParam))
                 ?shemaNameParam
                 :"default";

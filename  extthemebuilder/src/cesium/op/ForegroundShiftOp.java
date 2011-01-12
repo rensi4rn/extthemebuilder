@@ -39,19 +39,26 @@ public class ForegroundShiftOp implements BufferedImageOp {
         int width = src.getWidth();
         int height = src.getHeight();
 
+        //byte[] compsA= new byte[]{0};
+        byte[] compsR=new byte[]{0};
+        byte[] compsG=new byte[]{0};
+        byte[] compsB=new byte[]{0};
+        int oldAnotShifted;
+
         for (int x=0; x<width; x++){
             for (int y=0; y<height; y++){
                 int oldRgb = src.getRGB(x, y);
 
-                byte[] compsA= new byte[]{(byte)((oldRgb&a_mask)>>24)};
-                byte[] compsR=new byte[]{(byte)((oldRgb&r_mask)>>16)};
-                byte[] compsG=new byte[]{(byte)((oldRgb&g_mask)>>8)};
-                byte[] compsB=new byte[]{(byte)(oldRgb&b_mask)};
+                oldAnotShifted = oldRgb & a_mask;
+                //compsA[0]=(byte)(oldAnotShifted >>24);
+                compsR[0]=(byte)((oldRgb&r_mask)>>16);
+                compsG[0]=(byte)((oldRgb&g_mask)>>8);
+                compsB[0]=(byte)(oldRgb&b_mask);
 
 
                 this.rescale(compsR, compsG, compsB);
 
-                int newRgb = ((compsA[0]<<24)&a_mask)
+                int newRgb = oldAnotShifted
                         |((compsR[0]<<16)&r_mask)
                         |((compsG[0]<<8)&g_mask)
                         |(compsB[0]&b_mask);
@@ -82,20 +89,25 @@ public class ForegroundShiftOp implements BufferedImageOp {
         }else{
             int width = src.getWidth();
             int height = src.getHeight();
-
+            //byte[] compsA= new byte[]{0};
+            byte[] compsR=new byte[]{0};
+            byte[] compsG=new byte[]{0};
+            byte[] compsB=new byte[]{0};
+            int oldAnotShifted;
             for (int x=0; x<width; x++){
                 for (int y=0; y<height; y++){
                     int oldRgb = src.getRGB(x, y);
 
-                    byte[] compsA= new byte[]{(byte)((oldRgb&a_mask)>>24)};
-                    byte[] compsR=new byte[]{(byte)((oldRgb&r_mask)>>16)};
-                    byte[] compsG=new byte[]{(byte)((oldRgb&g_mask)>>8)};
-                    byte[] compsB=new byte[]{(byte)(oldRgb&b_mask)};
+                    oldAnotShifted = oldRgb & a_mask;
+                    //compsA[0]=(byte)(oldAnotShifted >>24);
+                    compsR[0]=(byte)((oldRgb&r_mask)>>16);
+                    compsG[0]=(byte)((oldRgb&g_mask)>>8);
+                    compsB[0]=(byte)(oldRgb&b_mask);
 
 
                     this.rescaleToWhite(compsR, compsG, compsB);
 
-                    int newRgb = ((compsA[0]<<24)&a_mask)
+                    int newRgb = oldAnotShifted
                             |((compsR[0]<<16)&r_mask)
                             |((compsG[0]<<8)&g_mask)
                             |(compsB[0]&b_mask);
@@ -202,12 +214,14 @@ public class ForegroundShiftOp implements BufferedImageOp {
             newRaster = newIndexColorModel.createCompatibleWritableRaster(width, height);
 
             int[] pixel;
+            int[] newIndex = new int[]{0};
             for (int y=0;y<height;y++){
                 for (int x=0;x<width;x++){
                     pixel = draster.getPixel(x, y, (int[]) null);
                     int alphaIndex = pixel[0];
                     if (dalphas[alphaIndex]==-1){
-                        newRaster.setPixel(x,y,new int[]{alphaIndex+size});
+                        newIndex[0] = alphaIndex + size;
+                        newRaster.setPixel(x,y, newIndex);
                     }else{
                         int[] ints = raster.getPixel(x, y, (int[]) null);
                         newRaster.setPixel(x,y,ints);

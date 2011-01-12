@@ -245,6 +245,7 @@ ul.x-tab-strip-bottom{
 .x-form-field-wrap .x-form-trigger{
     background-image:url(../images/default/form/trigger.gif);
     border-bottom-color:#b5b8c8;
+    border-style:none none solid solid;
 }
 
 .x-form-field-wrap .x-form-date-trigger{
@@ -321,6 +322,7 @@ ul.x-tab-strip-bottom{
     font-weight:normal;
     font-size:12px;
     font-family:arial, tahoma, helvetica, sans-serif;
+    color:#000;
 }
 
 .x-form-invalid-icon {
@@ -769,7 +771,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner, td.sort-desc .x-grid3-hd-inner, td.sort-as
 }
 
 .x-grid3-body .x-grid3-td-numberer .x-grid3-cell-inner {
-	color:#444;
+	color:#111;
 }
 
 .x-grid3-body .x-grid3-td-row-icon {
@@ -1788,12 +1790,12 @@ body.x-body-masked .x-window-plain .x-window-mc {
 .x-superboxselect-stacked li {float: none !important;}
 .x-superboxselect-input input { background-color:#fff; border: none; outline: none; margin-top: 1px; margin-bottom: 1px;}
 body.ext-ie .x-superboxselect-input input {background: none; border: none; margin-top: 0px;}
-.x-superboxselect-item {position: relative; border: 1px solid #F2F2F2; background-color: #F1F1F1; padding: 1px 15px 1px 2px !important; }
+.x-superboxselect-item {position: relative; border: 1px solid; border-color: #F2F2F2; background-color: #F1F1F1; padding: 1px 15px 1px 2px !important; }
 .x-superboxselect-item {-moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; o-border-radius: 3px; khtml-border-radius: 3px; }
 body.ext-ie7 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em; padding: 1px 17px 2px 2px !important;}
 body.ext-ie6 .x-superboxselect-item {margin: 2px 1px 2px 1px; line-height: 1.2em; padding: 2px 19px 4px 2px !important;}
-.x-superboxselect-item-hover {background: #F2F2F2; border: 1px solid #E1E1E1;}
-.x-superboxselect-item-focus {border-color: #EBEBEB; background: #EBEBEB; color: #fff;}
+.x-superboxselect-item-hover {background-color: #D7D7D7; border: 1px solid; border-color: #D0D0D0;}
+.x-superboxselect-item-focus {border-color: #EBEBEB; background-color: #EBEBEB; color: #fff;}
 .x-superboxselect-item-close {background: no-repeat scroll left 0px; background-image: url(../images/default/multiselect/close.gif); border: none; cursor: default; font-size: 1px; height: 16px;padding:0; position: absolute; right: 0px; top: 0px; width: 13px;display:block;cursor:pointer;}
 
 .x-superboxselect-item-close:hover, .x-superboxselect-item-close:active  { background-position: left -12px;}

@@ -23,7 +23,7 @@ import java.util.LinkedHashMap;
  * @Time: 13:30:22
  */
 public class CSSDocHandler extends DefaultDocumentHandler {
-    private cesium.factory.ResourcesLoaderFactory loaderFactory;
+    private ResourcesLoaderFactory loaderFactory;
     private ApplicationContext context;
     private ThemeSettings themeSettings;
     private LinkedHashMap resources = new LinkedHashMap();
@@ -114,7 +114,7 @@ public class CSSDocHandler extends DefaultDocumentHandler {
         currentSelectorList = selectorList;
         currentCssRuleHolder = new CSSRuleHolderImpl();
 
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (int i= 0; null!=selectorList&&i<selectorList.getLength();i++){
             if (i>0) buffer.append(", ");
             Selector selector = selectorList.item(i);
@@ -127,7 +127,7 @@ public class CSSDocHandler extends DefaultDocumentHandler {
 
     public void endSelector(SelectorList selectorList) throws CSSException {
         super.endSelector(selectorList);
-        if (null!=currentCssRuleHolder&&currentCssRuleHolder.size()>0)
+        if (null!=currentCssRuleHolder&& !currentCssRuleHolder.isEmpty())
             resources.put(currentSelectorList, currentCssRuleHolder);
         currentSelectorList = null;
         currentCssRuleHolder=null;

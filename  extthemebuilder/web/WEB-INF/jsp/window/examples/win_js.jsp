@@ -27,7 +27,7 @@ createWindow : function(idWin){
             id:idWin,
             width:630,
             height:400,
-            title:'Window',
+            title:'Window example',
             manager:windows,
             items: []
         });

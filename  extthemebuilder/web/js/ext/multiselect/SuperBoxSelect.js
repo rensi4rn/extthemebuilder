@@ -1,17 +1,4 @@
 Ext.namespace('Ext.ux.form');
-/**
- * <p>SuperBoxSelect is an extension of the ComboBox component that displays selected items as labelled boxes within the form field. As seen on facebook, hotmail and other sites.</p>
- * <p>The SuperBoxSelect component was inspired by the BoxSelect component found here: http://efattal.fr/en/extjs/extuxboxselect/</p>
- * 
- * @author <a href="mailto:dan.humphrey@technomedia.co.uk">Dan Humphrey</a>
- * @class Ext.ux.form.SuperBoxSelect
- * @extends Ext.form.ComboBox
- * @constructor
- * @component
- * @version 1.0
- * @license TBA (To be announced)
- * 
- */
 Ext.ux.form.SuperBoxSelect = function(config) {
     Ext.ux.form.SuperBoxSelect.superclass.constructor.call(this,config);
     this.addEvents(
@@ -1497,10 +1484,22 @@ Ext.ux.form.SuperBoxSelectItem = Ext.extend(Ext.ux.form.SuperBoxSelectItem,Ext.C
         this.owner.outerWrapEl.removeClass("x-form-focus");
     },
     
+    onMouseEnter : function(){
+        this.el.addClass("x-superboxselect-item x-superboxselect-item-hover");
+    },
+
+    onMouseOut : function(){
+        this.el.removeClass("x-superboxselect-item-hover");
+    },
+
     enableElListeners : function() {
         this.el.on('click', this.onElClick, this, {stopEvent:true});
-       
-        this.el.addClassOnOver('x-superboxselect-item x-superboxselect-item-hover');
+        this.el.on('mouseenter', this.onMouseEnter, this, {stopEvent:true});
+        this.el.on('mouseover', this.onMouseEnter, this, {stopEvent:true});
+        this.el.on('mouseleave', this.onMouseOut, this, {stopEvent:true});
+        this.el.on('mouseout', this.onMouseOut, this, {stopEvent:true});
+
+        //this.el.addClassOnOver('x-superboxselect-item x-superboxselect-item-hover');
     },
 
     enableLnkListeners : function() {

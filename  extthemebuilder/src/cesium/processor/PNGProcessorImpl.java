@@ -4,6 +4,7 @@ import cesium.factory.ResourcesProcessorFactoryImpl;
 import cesium.holder.AbstractResourcesHolder;
 import cesium.holder.PNGHolderImpl;
 import cesium.holder.ResourcesHolder;
+import cesium.holder.ThemeParametersHolder;
 import cesium.op.ExtJSRescaleOp;
 import cesium.op.ForegroundShiftOp;
 import com.sun.imageio.plugins.png.PNGImageReader;
@@ -44,7 +45,7 @@ public class PNGProcessorImpl extends AbstractImageProcessor {
     }
 
     public ResourcesHolder process(ResourcesHolder resHolder,
-                                   ExtJSRescaleOp brightenOp, ForegroundShiftOp foregroundOp,
+                                   ThemeParametersHolder themeParametersHolder, ExtJSRescaleOp brightenOp, ForegroundShiftOp foregroundOp,
                                    ExtJSRescaleOp liteOp, ExtJSRescaleOp bgOp,
                                    ExtJSRescaleOp fontOp,
                                    ExtJSRescaleOp transparencyOp, ExtJSRescaleOp borderOp,
@@ -67,7 +68,7 @@ public class PNGProcessorImpl extends AbstractImageProcessor {
         //end png processing exclusion
 
         ResourcesHolder newResourcesHolder = super.process(resHolder,
-                brightenOp, foregroundOp, liteOp, bgOp, fontOp, transparencyOp,
+                themeParametersHolder, brightenOp, foregroundOp, liteOp, bgOp, fontOp, transparencyOp,
                 borderOp, (AffineTransformOp) affineTransformOp, headerFontOp, shadowTransparencyOp,
                 headerOp, toolsetSchemaHolder, toolsetName,
                 familyHeaderFont, weightHeaderFont, sizeHeaderFont,
@@ -99,6 +100,7 @@ public class PNGProcessorImpl extends AbstractImageProcessor {
 
         BufferedImage image = null;
         try {
+            ImageIO.setUseCache(false);
 
             byte[] drawableData=null;
             ByteArrayInputStream dis = null;

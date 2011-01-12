@@ -3,6 +3,7 @@ package cesium.processor;
 import cesium.factory.ResourcesProcessorFactoryImpl;
 import cesium.holder.CSSPropertyHolderImpl;
 import cesium.holder.ResourcesHolder;
+import cesium.holder.ThemeParametersHolder;
 import cesium.op.ExtJSRescaleOp;
 import cesium.op.ForegroundShiftOp;
 import org.apache.batik.css.parser.CSSLexicalUnit;
@@ -29,7 +30,7 @@ public class CSSPropertyProcessorImpl extends AbstractResourcesProcessor {
     }
 
     public ResourcesHolder process(ResourcesHolder resHolder,
-                                   ExtJSRescaleOp brightenOp,
+                                   ThemeParametersHolder themeParametersHolder, ExtJSRescaleOp brightenOp,
                                    ForegroundShiftOp foregroundOp,
                                    ExtJSRescaleOp liteOp, ExtJSRescaleOp bgOp,
                                    ExtJSRescaleOp fontOp, ExtJSRescaleOp transparencyOp,
@@ -37,7 +38,7 @@ public class CSSPropertyProcessorImpl extends AbstractResourcesProcessor {
                                    ExtJSRescaleOp headerFontOp, BufferedImageOp shadowTransparencyOp,
                                    ExtJSRescaleOp headerOp, ResourcesHolder toolsetSchemaHolder, String toolsetName,
                                    String familyHeaderFont, String weightHeaderFont, byte sizeHeaderFontDiff, String familyFont, String weightFont, byte sizeFontDiff, ResourcesHolder drawableSchemaHolder) {
-        ResourcesHolder newHolder = super.process(resHolder, brightenOp, foregroundOp,
+        ResourcesHolder newHolder = super.process(resHolder, themeParametersHolder, brightenOp, foregroundOp,
                 liteOp, bgOp, fontOp, transparencyOp, borderOp, (AffineTransformOp) affineTransformOp,
                 headerFontOp, shadowTransparencyOp, headerOp, toolsetSchemaHolder, toolsetName,
                 familyHeaderFont, weightHeaderFont, sizeHeaderFontDiff, familyFont, weightFont, sizeFontDiff, drawableSchemaHolder);

@@ -21,11 +21,23 @@ import javax.servlet.ServletContext;
  * @Time: 4:02:09
  */
 public class ResourceHolderPool extends ObjectPool<ResourcesHolder>{
+    private static ResourceHolderPool resourceHolderPool = null;
+
     private String resourcesPath;
     private ResourcesLoaderFactory loaderFactory;
     private ThemeSettings themeSettings;
 
-    public ResourceHolderPool(long expirationTime, int initialCapacity,
+    public static synchronized ResourceHolderPool getInstance(long expirationTime, int initialCapacity,
+                              String resourcesPath, ResourcesLoaderFactory loaderFactory,
+                              ThemeSettings themeSettings) {
+        if (null==resourceHolderPool){
+            return new ResourceHolderPool(expirationTime, initialCapacity,
+                               resourcesPath, loaderFactory,
+                               themeSettings);
+        }else {return resourceHolderPool;}
+    }
+
+    private ResourceHolderPool(long expirationTime, int initialCapacity,
                               String resourcesPath, ResourcesLoaderFactory loaderFactory,
                               ThemeSettings themeSettings) {
         super(expirationTime);

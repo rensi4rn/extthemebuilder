@@ -4,6 +4,7 @@ import cesium.factory.ResourcesHolderFactory;
 import cesium.factory.ResourcesHolderFactoryImpl;
 import cesium.factory.ResourcesProcessorFactoryImpl;
 import cesium.holder.ResourcesHolder;
+import cesium.holder.ThemeParametersHolder;
 import cesium.op.ExtJSRescaleOp;
 import cesium.op.ForegroundShiftOp;
 import org.springframework.context.ApplicationContext;
@@ -43,7 +44,7 @@ public abstract class AbstractResourcesProcessor implements ResourcesProcessor{
     }
 
     public ResourcesHolder process(ResourcesHolder resHolder,
-                                   ExtJSRescaleOp brightenOp, ForegroundShiftOp foregroundOp,
+                                   ThemeParametersHolder themeParametersHolder, ExtJSRescaleOp brightenOp, ForegroundShiftOp foregroundOp,
                                    ExtJSRescaleOp liteOp, ExtJSRescaleOp bgOp,
                                    ExtJSRescaleOp fontOp, ExtJSRescaleOp transparencyOp,
                                    ExtJSRescaleOp borderOp, AffineTransformOp affineTransformOp,
@@ -57,13 +58,13 @@ public abstract class AbstractResourcesProcessor implements ResourcesProcessor{
         holder.setContent(content);
         String resourcesPath = resHolder.getResourcesPath();
         holder.setResourcesPath(resourcesPath);
-        if (null!=resHolder&&resHolder.size()>0){
+        if (null!=resHolder&& !resHolder.isEmpty()){
             for (Iterator iterator = resHolder.keySet().iterator(); iterator.hasNext();) {
                 Object key = iterator.next();
                 ResourcesHolder innerHolder = (ResourcesHolder) resHolder.get(key);
                 ResourcesProcessor processor = resourcesProcessorFactory.getResourcesProcessor(innerHolder, context);
                 if (null!=processor&&null!=innerHolder){
-                    ResourcesHolder newInnerHolder = processor.process(innerHolder, brightenOp, foregroundOp, liteOp, bgOp, fontOp,
+                    ResourcesHolder newInnerHolder = processor.process(innerHolder, themeParametersHolder, brightenOp, foregroundOp, liteOp, bgOp, fontOp,
                             transparencyOp, borderOp, (AffineTransformOp) affineTransformOp, headerFontOp, shadowTransparencyOp,
                             headerOp, toolsetSchemaHolder, toolsetName, familyHeaderFont, weightHeaderFont, sizeHeaderFont,
                             familyFont, weightFont, sizeFont, drawableSchemaHolder);
