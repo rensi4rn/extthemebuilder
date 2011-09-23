@@ -792,7 +792,7 @@ var moduleConfig = {
                 onBlur:onBlurCP,
                 listeners:{'spin':onBlurCP},
                 width:70,
-                maxValue:20,
+                maxValue:70,
                 minValue:5
             });
 
@@ -808,7 +808,7 @@ var moduleConfig = {
                 onBlur:onBlurCP,
                 listeners:{'spin':onBlurCP},
                 width:70,
-                maxValue:20,
+                maxValue:70,
                 minValue:5
             });
 
