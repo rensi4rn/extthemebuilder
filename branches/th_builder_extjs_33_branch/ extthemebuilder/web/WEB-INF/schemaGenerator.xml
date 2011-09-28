@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <import resource="spring-config.xml"/>
+
+    <bean name="/simplewindow_js.htm" class="springapp.web.controller.theme.ThemeSettingsController">
+        <property name="loaderFactory" ref="loaderFactory"/>
+        <property name="holderPool" ref="resourceHolderPool"/>
+        <property name="holderGrayPool" ref="resourceGrayHolderPool"/>
+    </bean>
+    <bean name="/processSchema.htm" class="springapp.web.controller.theme.ProcessThemeController">
+        <property name="resourcesProcessorFactory" ref="processorFactory"/>
+        <property name="holderPool" ref="resourceHolderPool"/>
+        <property name="holder23Pool" ref="resource23HolderPool"/>
+        <property name="holder31Pool" ref="resource31HolderPool"/>
+        <property name="holder32Pool" ref="resource32HolderPool"/>
+        <property name="holder33Pool" ref="resource33HolderPool"/>
+        <property name="holderGrayPool" ref="resourceGrayHolderPool"/>
+        <property name="holderGray23Pool" ref="resourceGray23HolderPool"/>
+        <property name="holderGray31Pool" ref="resourceGray31HolderPool"/>
+        <property name="holderGray32Pool" ref="resourceGray32HolderPool"/>
+        <property name="holderGray33Pool" ref="resourceGray33HolderPool"/>
+        <property name="holderToolsetPool" ref="resourceToolsetHolderPool"/>
+        <property name="holderDrawablePool" ref="resourceDrawableHolderPool"/>
+    </bean>
+    <bean name="/getResource.htm" class="springapp.web.controller.theme.ResourceController" scope="request">
+        <property name="loaderFactory" ref="loaderFactory"/>
+    </bean>
+    <bean name="/downloadSchema.htm" class="springapp.web.controller.theme.DownloadController">
+        <property name="loaderFactory" ref="loaderFactory"/>
+    </bean>
+
+    <bean name="/grid_js.htm" class="springapp.web.controller.theme.examples.GridController"/>
+    <bean name="/tabs_js.htm" class="springapp.web.controller.theme.examples.TabsController"/>
+    <bean name="/dd_js.htm" class="springapp.web.controller.theme.examples.TreeAndDDController"/>
+    <bean name="/win_js.htm" class="springapp.web.controller.theme.examples.WinController"/>
+    <bean name="/btn_js.htm" class="springapp.web.controller.theme.examples.BtnController"/>
+    <bean name="/pivot_js.htm" class="springapp.web.controller.theme.examples.PivotGridController"/>
+
+    <bean name="/getToolsets.htm" class="springapp.web.controller.theme.ToolsetsController"/>
+    <bean name="/getPivotData.htm" class="springapp.web.controller.theme.PivotDataController"/>
+
+</beans>

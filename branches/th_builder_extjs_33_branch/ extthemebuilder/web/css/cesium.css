@@ -1,0 +1,145 @@
+.ext-error{background:transparent url(../js/ext/resources/images/default/window/icon-error.gif) no-repeat top left;}
+.window-icon { background: url( ../images/window.gif ) 0 6px no-repeat !important;}
+.form-icon { background: url( ../images/form.gif ) 0 6px no-repeat !important;}
+.x-tbar-pdf{background-image: url( ../images/pdf.gif ) !important;}
+.x-tbar-excel{background-image: url( ../images/excel_x.gif ) !important;}
+
+.x-item-disabled .x-tbar-excel{background-image: url( ../images/excel_x.gif ) !important;}
+.x-item-disabled .x-tbar-pdf{background-image: url( ../images/pdf.gif ) !important;}
+
+.x-over-layer{visibility:hidden;z-index:90010;}
+
+.ext-ux-uploaddialog-addbtn
+{
+	background: url( '../images/file-add.gif' ) !important;
+}
+
+.ext-ux-addbtn
+{
+	background: url( '../images/drop-add.gif' ) !important;
+}
+
+.ext-ux-viewbtn
+{
+	background: url( '../images/note.gif' ) no-repeat center center !important;
+}
+
+.x-button-print
+{
+	background: url( '../images/printer_fax.gif' ) no-repeat left center !important;
+}
+
+.ext-ux-uploaddialog-removebtn
+{
+	background: url( '../images/file-remove.gif' ) !important;
+}
+
+.ext-ux-removebtn
+{
+	background: url( '../images/delete.gif' ) !important;
+}
+
+.ext-ux-uploaddialog-resetbtn
+{
+	background: url( '../images/reset.gif' ) no-repeat left center !important;
+}
+
+.x-button-save {
+    background: url( '../images/disk.gif' ) no-repeat left center !important;
+}
+
+.x-button-edit {
+    background: url( '../images/edit.gif' ) no-repeat center center !important;
+}
+
+.ext-ux-nextbtn {
+    background: url( '../images/page-next.gif' ) no-repeat center center !important;
+}
+.ext-ux-prevbtn {
+    background: url( '../images/page-prev.gif' ) no-repeat center center !important;
+}
+.x-toolbar .ext-ux-nextbtn-disabled {
+    background: url( '../images/page-next-disabled.gif' ) no-repeat center center !important;
+}
+.x-toolbar .ext-ux-prevbtn-disabled {
+    background: url( '../images/page-prev-disabled.gif' ) no-repeat center center !important;
+}
+.ext-ux-lastbtn {
+    background: url( '../images/page-last.gif' ) no-repeat center center !important;
+}
+.ext-ux-firstbtn {
+    background: url( '../images/page-first.gif' ) no-repeat center center !important;
+}
+.x-toolbar .ext-ux-lastbtn-disabled {
+    background: url( '../images/page-last-disabled.gif' ) no-repeat center center !important;
+}
+.x-toolbar .ext-ux-firstbtn-disabled {
+    background: url( '../images/page-first-disabled.gif' ) no-repeat center center !important;
+}
+
+.ext-ux-button-reset {
+    background: url( '../images/reset.png' ) no-repeat left center !important;
+}
+
+
+/*.ux-taskbuttons-scroller-left {
+    background: transparent url( ../images/taskbar/scroll-left.gif ) no-repeat -18px 0;
+    width:18px;
+    position:absolute;
+    left:1px;
+    top:0px;
+    z-index:10;
+    cursor:pointer;
+}
+.ux-taskbuttons-scroller-left-over {
+    background-position: 0 0;
+}
+.ux-taskbuttons-scroller-left-disabled {
+    background-position: -18px 0;
+    opacity:.5;
+    -moz-opacity:.5;
+    filter:alpha(opacity=50);
+    cursor:default;
+}
+.ux-taskbuttons-scroller-right {
+    background: transparent url( ../images/taskbar/scroll-right.gif ) no-repeat 0 0;
+    width:18px;
+    position:absolute;
+    right:0;
+    top:0px;
+    z-index:10;
+    cursor:pointer;
+}
+.ux-taskbuttons-scroller-right-over {
+    background-position: -18px 0;
+}
+.ux-taskbuttons-scroller-right-disabled {
+    background-position: 0 0;
+    opacity:.5;
+    -moz-opacity:.5;
+    filter:alpha(opacity=50);
+    cursor:default;
+}*/
+
+
+.x-tbar-page-number{width:40px;height:14px;}
+
+/*.x-imagefield-preview{width:100px;height:100px;}*/
+
+.bmenu {
+    background-image: url( ../images/menu-show.gif ) !important;
+}
+
+
+.x-item-viewed {
+    color: black;
+    cursor: default;
+    opacity: .9;
+    -moz-opacity: .9;
+    filter: alpha(opacity=90);
+}
+
+.x-item-disabled * {
+    color: black !important;
+    cursor: default !important;
+}
