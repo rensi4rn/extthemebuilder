@@ -42,8 +42,8 @@ public class CSSDocHandler extends DefaultDocumentHandler {
     }
 
     public CSSDocHandler(
-            ResourcesLoaderFactory loaderFactory
-            , ApplicationContext context, ThemeSettings themeSettings) {
+            final ResourcesLoaderFactory loaderFactory
+            , final ApplicationContext context, final ThemeSettings themeSettings) {
         this.loaderFactory = loaderFactory;
         this.context = context;
         this.themeSettings = themeSettings;
