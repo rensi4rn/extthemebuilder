@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package springapp.web.controller.theme.examples;
 
 import org.apache.commons.logging.Log;
@@ -8,18 +18,6 @@ import org.springframework.web.servlet.mvc.Controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * @project: Theme Builder for ExtJS 3.0
- * @package: springapp.web.controller.theme.examples
- * @class: PivotGridController
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 19.10.2010
- * @Time: 22:44:22
- */
 public class PivotGridController implements Controller {
     protected final Log logger = LogFactory.getLog(getClass());
 

@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.processor;
 
 import cesium.factory.ResourcesProcessorFactoryImpl;
@@ -10,16 +20,6 @@ import org.springframework.context.ApplicationContext;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImageOp;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 17.08.2009
- * @Time: 16:55:56
- */
 public class CSSRuleProcessorImpl extends AbstractResourcesProcessor {
     public CSSRuleProcessorImpl(ApplicationContext context,
                                 ResourcesProcessorFactoryImpl resourcesProcessorFactory) {

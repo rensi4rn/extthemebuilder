@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.handler;
 
 import cesium.factory.ResourcesLoaderFactory;
@@ -5,24 +15,14 @@ import cesium.holder.CSSPropertyHolderImpl;
 import cesium.holder.CSSRuleHolderImpl;
 import cesium.holder.ResourcesHolder;
 import cesium.theme.settings.ThemeSettings;
-import org.apache.batik.css.parser.DefaultDocumentHandler;
+import com.steadystate.css.parser.HandlerBase;
 import org.springframework.context.ApplicationContext;
 import org.w3c.css.sac.*;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 16.08.2009
- * @Time: 13:30:22
- */
-public class CSSDocHandler extends DefaultDocumentHandler {
+public class CSSDocHandler extends HandlerBase {
     private ResourcesLoaderFactory loaderFactory;
     private ApplicationContext context;
     private ThemeSettings themeSettings;
@@ -125,6 +125,10 @@ public class CSSDocHandler extends DefaultDocumentHandler {
         //System.out.println("startSelector");
     }
 
+    public void startSelector(final SelectorList selectors, final Locator locator) throws CSSException {
+        startSelector(selectors);
+    }
+
     public void endSelector(SelectorList selectorList) throws CSSException {
         super.endSelector(selectorList);
         if (null!=currentCssRuleHolder&& !currentCssRuleHolder.isEmpty())
@@ -190,5 +194,9 @@ public class CSSDocHandler extends DefaultDocumentHandler {
                 + " lexicalUnitType = " + lexicalUnit.getLexicalUnitType()
         );
 */
+    }
+
+    public void property(final String name, final LexicalUnit value, final boolean important, final Locator locator) {
+        property(name, value, important);
     }
 }

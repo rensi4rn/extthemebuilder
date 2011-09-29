@@ -1,4 +1,4 @@
-Theme Builder for ExtJS 1.0.0
+Theme Builder for ExtJS framework
 
 ----------------------------------------------------------------------------
 | LEGAL                                                                    |
@@ -6,7 +6,7 @@ Theme Builder for ExtJS 1.0.0
 
 This software is licensed under the LGPL v3.
 
-Copyright(c) 2009-2010 Sergey Chentsov (sergchentsov@gmail.com) All
+Copyright(c) 2009-2011 Sergey Chentsov (sergchentsov@gmail.com) All
 rights reserved.
 This material cannot be distributed without written
 permission from Sergey Chentsov. Permission to use, copy, and modify
@@ -63,9 +63,6 @@ Ext.ux.ColorPicker
 Ext.ux.form.SuperBoxSelect
 
 ant-1.6.5.jar
-batik-css.jar
-batik-ext.jar
-batik-util.jar
 commons-beanutils.jar
 commons-codec-1.3.jar
 commons-collections.jar
@@ -133,9 +130,6 @@ license:
 
 /-Library name------------/----License---/
 / ant-1.6.5.jar           / Apache 2.0   /
-/ batik-css.jar           / Apache 2.0   /
-/ batik-ext.jar           / W3C SOFTWARE /
-/ batik-util.jar          / Apache 2.0   /
 / commons-beanutils.jar   / Apache 2.0   /
 / commons-codec-1.3.jar   / Apache 2.0   /
 / commons-collections.jar / Apache 2.0   /

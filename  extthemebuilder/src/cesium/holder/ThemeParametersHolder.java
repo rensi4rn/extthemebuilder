@@ -1,17 +1,15 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.holder;
 
-/**
- * @project: Theme Builder for ExtJS 3.0
- * @package: cesium.holder
- * @class: ThemeParametersHolder
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 14.10.2010
- * @Time: 17:25:18
- */
 public class ThemeParametersHolder {
     String templateIdString, newColorString, newHeaderColorString,  newBgColorString,
             newFontColorString,  newHeaderFontColorString,

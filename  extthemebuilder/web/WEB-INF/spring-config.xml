@@ -127,9 +127,6 @@
     <bean id="pngLoader" class="cesium.loader.PNGResourceLoaderImpl"  scope="prototype">
         <property name="resourcesLoaderFactory" ref="loaderFactory"/>
     </bean>
-    <bean id="psdLoader" class="cesium.loader.PSDResourceLoaderImpl"  scope="prototype">
-        <property name="resourcesLoaderFactory" ref="loaderFactory"/>
-    </bean>
 
     <bean id="loaderFactory" class="cesium.factory.ResourcesLoaderFactoryImpl"  scope="prototype"/>
 

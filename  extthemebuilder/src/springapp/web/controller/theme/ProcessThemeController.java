@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package springapp.web.controller.theme;
 
 import cesium.factory.ResourcesProcessorFactory;
@@ -24,16 +34,6 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImageOp;
 import java.util.HashMap;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 24.08.2009
- * @Time: 22:21:35
- */
 public class ProcessThemeController implements Controller {
     protected final Log logger = LogFactory.getLog(getClass());
 

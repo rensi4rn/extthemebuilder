@@ -2,6 +2,16 @@
 
 <%@ include file="/WEB-INF/jsp/include/include_js.jsp" %>
 
+<%--
+  ~ Theme Builder for ExtJS framework Project.
+  ~
+  ~ Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+  ~
+  ~ License: LGPL_v3
+  ~ Author: Sergey Chentsov (extjs id: iv_ekker)
+  ~ mailto: sergchentsov@gmail.com
+  --%>
+
 /**
  * @project: Theme Builder for ExtJS 3.x
  * @Description: This is a Theme Builder settings form window

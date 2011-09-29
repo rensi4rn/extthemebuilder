@@ -1,6 +1,16 @@
 <%@ page import="springapp.constants.ApplicationConstants" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
+<%--
+  ~ Theme Builder for ExtJS framework Project.
+  ~
+  ~ Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+  ~
+  ~ License: LGPL_v3
+  ~ Author: Sergey Chentsov (extjs id: iv_ekker)
+  ~ mailto: sergchentsov@gmail.com
+  --%>
+
 <html>
 <%@ include file="/WEB-INF/jsp/include/include.jsp" %>
 

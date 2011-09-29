@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package springapp.web.controller.theme;
 
 import cesium.factory.ResourcesLoaderFactory;
@@ -19,16 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 27.08.2009
- * @Time: 19:38:26
- */
 public class DownloadController implements Controller {
     protected final Log logger = LogFactory.getLog(getClass());
     private ResourcesLoaderFactory loaderFactory ;

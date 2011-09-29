@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.processor;
 
 import cesium.op.ShiftOp;
@@ -6,16 +16,6 @@ import cesium.utils.ExtJSPixelGrabber;
 import java.awt.*;
 import java.awt.image.*;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 09.03.2010
- * @Time: 10:18:48
- */
 public abstract class AbstractImageProcessor extends AbstractResourcesProcessor{
 
     // This method returns the color model of an image

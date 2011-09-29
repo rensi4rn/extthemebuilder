@@ -1,6 +1,16 @@
 <%@ page contentType="text/javascript;charset=UTF-8" language="java" %>
 <%@ include file="/WEB-INF/jsp/include/include_js.jsp" %>
 
+<%--
+  ~ Theme Builder for ExtJS framework Project.
+  ~
+  ~ Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+  ~
+  ~ License: LGPL_v3
+  ~ Author: Sergey Chentsov (extjs id: iv_ekker)
+  ~ mailto: sergchentsov@gmail.com
+  --%>
+
 <%--<%@ page session="false"%>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
