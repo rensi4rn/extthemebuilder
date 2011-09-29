@@ -1,18 +1,18 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.holder;
 
 import java.rmi.server.UID;
 import java.util.*;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 25.08.2009
- * @Time: 1:33:00
- */
 public abstract class AbstractResourcesHolder extends LinkedHashMap implements ResourcesHolder{
     protected UID ouid = new UID();
     private String resourcesPath;

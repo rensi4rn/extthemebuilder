@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.processor;
 
 import cesium.factory.ResourcesLoaderFactory;
@@ -15,16 +25,6 @@ import java.awt.color.ColorSpace;
 import java.awt.image.ColorConvertOp;
 import java.util.HashMap;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 11.08.2009
- * @Time: 2:16:56
- */
 public class SchemaProcessorImpl extends AbstractResourcesProcessor{
     private static String springConfigLocation = "src\\spring-config.xml";
 

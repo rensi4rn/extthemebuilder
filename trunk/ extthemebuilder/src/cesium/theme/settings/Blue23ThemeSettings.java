@@ -1,17 +1,15 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.theme.settings;
 
-/**
- * @project: Theme Builder for ExtJS 3.0
- * @package: cesium.theme.settings
- * @class: Blue23ThemeSettings
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 10.09.2010
- * @Time: 15:35:10
- */
 public class Blue23ThemeSettings extends BlueThemeSettings{
     public BorderSet getBorderSetGIF(String resourcePath) {
         BorderSet borderSet = super.getBorderSetGIF(resourcePath);

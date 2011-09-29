@@ -1,19 +1,19 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.factory;
 
 import cesium.holder.*;
 import cesium.processor.*;
 import org.springframework.context.ApplicationContext;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 17.08.2009
- * @Time: 15:13:49
- */
 public class ResourcesProcessorFactoryImpl implements ResourcesProcessorFactory {
     public ResourcesProcessor getResourcesProcessor(ResourcesHolder resourcesHolder
             , ApplicationContext context){

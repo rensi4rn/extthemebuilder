@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.processor;
 
 import cesium.factory.ResourcesProcessorFactoryImpl;
@@ -27,16 +37,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 17.08.2009
- * @Time: 17:03:14
- */
 public class PNGProcessorImpl extends AbstractImageProcessor {
     public PNGProcessorImpl(ApplicationContext context,
                             ResourcesProcessorFactoryImpl resourcesProcessorFactory) {

@@ -1,23 +1,22 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.factory;
 
 import cesium.holder.*;
 import cesium.loader.ResourcesLoader;
 import org.springframework.context.ApplicationContext;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 11.08.2009
- * @Time: 10:55:59
- */
 public class ResourcesLoaderFactoryImpl implements ResourcesLoaderFactory {
     static String css_ext = DOT_SYMBOL + CSS_EXTENSION;
     static String gif_ext = DOT_SYMBOL + GIF_EXTENSION;
-    static String psd_ext = DOT_SYMBOL + PSD_EXTENSION;
     static String png_ext = DOT_SYMBOL + PNG_EXTENSION;
 
     public boolean isValidResourceFileName(String fileName){
@@ -25,7 +24,7 @@ public class ResourcesLoaderFactoryImpl implements ResourcesLoaderFactory {
         return isValidCSSFileName(fileName)
                 || isValidGIFFileName(fileName)
                 || isValidPNGFileName(fileName)
-                /*|| isValidPSDFileName(fileName)*/;
+                ;
     }
 
     public boolean isValidCSSFileName(String name) {
@@ -40,9 +39,6 @@ public class ResourcesLoaderFactoryImpl implements ResourcesLoaderFactory {
         return name.endsWith(png_ext);
     }
 
-    public boolean isValidPSDFileName(String name) {
-        return name.endsWith(psd_ext);
-    }
 
     public ResourcesLoader getResourcesLoader(String resourcesPath, ApplicationContext context) {
         ResourcesLoader result = null;
@@ -55,9 +51,6 @@ public class ResourcesLoaderFactoryImpl implements ResourcesLoaderFactory {
         else if (isValidPNGFileName(resourcesPath))
             result = (ResourcesLoader)
                 context.getBean("pngLoader");
-        else if (isValidPSDFileName(resourcesPath))
-            result = (ResourcesLoader)
-                context.getBean("psdLoader");
         else result = (ResourcesLoader)
                 context.getBean("schemaLoader");
         return result;
@@ -75,9 +68,6 @@ public class ResourcesLoaderFactoryImpl implements ResourcesLoaderFactory {
         else if (holder instanceof PNGHolderImpl)
             result = (ResourcesLoader)
                 context.getBean("pngLoader");
-        else if (holder instanceof PSDHolderImpl)
-            result = (ResourcesLoader)
-                context.getBean("psdLoader");
         else result = (ResourcesLoader)
                 context.getBean("schemaLoader");
         return result;

@@ -1,17 +1,17 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.holder;
 
 import org.w3c.css.sac.LexicalUnit;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 17.08.2009
- * @Time: 14:03:33
- */
 public class CSSPropertyHolderImpl extends AbstractResourcesHolder implements PropertyHolder{
     private LexicalUnit lexicalUnit;
     private boolean isImportant;
@@ -182,11 +182,12 @@ public class CSSPropertyHolderImpl extends AbstractResourcesHolder implements Pr
     }
 
     private String getCommonPropertyStringValue(LexicalUnit lxUnit) {
-        String propValue = lxUnit.toString();
+        StringBuilder propValueStringBuilder = new StringBuilder();
         short lexicalUnitType = lxUnit.getLexicalUnitType();
+        String isImptnt = isImportant ? " !important" : "";
         if (lexicalUnitType == LexicalUnit.SAC_URI){
-            propValue = "url("+lxUnit.getStringValue()+")"+(isImportant?" !important":"");
-        }
+            propValueStringBuilder.append("url(").append(lxUnit.getStringValue()).append(")");
+        } else
         if (lexicalUnitType == LexicalUnit.SAC_RGBCOLOR){
             int oldIntegerValueR = lxUnit.getParameters().getIntegerValue();
             int oldIntegerValueG = lxUnit.getParameters().getNextLexicalUnit()
@@ -203,28 +204,35 @@ public class CSSPropertyHolderImpl extends AbstractResourcesHolder implements Pr
             String b = Integer.toHexString(
                     oldIntegerValueB
             );
-            propValue = new StringBuilder()
-                    .append("#")
+            propValueStringBuilder.append("#")
                     .append(r.length() == 1 ? ("0" + r) : r)
                     .append(g.length() == 1 ? ("0" + g) : g)
                     .append(b.length() == 1 ? ("0" + b) : b)
-                    .append(isImportant ? " !important" : "").toString();
-            //propValue = lxUnit.toString()+(isImportant?" !important":"");
+                    .toString();
+            //propValueStringBuilder = lxUnit.toString()+(isImportant?" !important":"");
 
-        }
+        } else
         if (lexicalUnitType == LexicalUnit.SAC_IDENT
                 ||lexicalUnitType == LexicalUnit.SAC_STRING_VALUE){
-            propValue = lxUnit.toString()+(isImportant?" !important":"");
-        }
+            propValueStringBuilder.append(lxUnit.toString());
+        } else
         if (lexicalUnitType == LexicalUnit.SAC_INTEGER){
-            propValue = lxUnit.toString()+(isImportant?" !important":"");
-        }
+            propValueStringBuilder.append(lxUnit.toString());
+        } else
         if (lexicalUnitType == LexicalUnit.SAC_PIXEL
                 ||lexicalUnitType == LexicalUnit.SAC_REAL){
-            propValue = lxUnit.toString()+(isImportant?" !important":"");
+            propValueStringBuilder.append(lxUnit.toString());
+        } else {
+            propValueStringBuilder.append(lxUnit.toString());
         }
 
-        return propValue;
+        LexicalUnit nextLexicalUnit = lexicalUnit.getNextLexicalUnit();
+        while (null!=nextLexicalUnit){
+            propValueStringBuilder.append(" ");
+            propValueStringBuilder.append(nextLexicalUnit.toString());
+            nextLexicalUnit = nextLexicalUnit.getNextLexicalUnit();
+        }
+        return propValueStringBuilder.toString() + isImptnt;
     }
 
     public boolean isResizableOpacityCSSProperty() {

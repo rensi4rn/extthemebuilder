@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.op;
 
 import sun.awt.image.ImagingLib;
@@ -9,16 +19,6 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.*;
 import java.util.Arrays;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 23.08.2009
- * @Time: 23:44:55
- */
 public class ExtJSRescaleOp implements BufferedImageOp, RasterOp {
     float[] scaleFactors;
     float[] offsets;

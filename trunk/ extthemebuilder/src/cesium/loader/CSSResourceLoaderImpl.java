@@ -1,34 +1,33 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.loader;
 
 import cesium.factory.ResourcesLoaderFactory;
 import cesium.handler.CSSDocHandler;
 import cesium.holder.*;
 import cesium.theme.settings.ThemeSettings;
-import org.apache.batik.css.parser.CSSSelectorList;
-import org.apache.batik.css.parser.CustomParser;
-import org.apache.batik.css.parser.Parser;
+import com.steadystate.css.parser.SACParserCSS21;
+import com.steadystate.css.parser.SelectorListImpl;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipOutputStream;
 import org.springframework.context.ApplicationContext;
 import org.w3c.css.sac.InputSource;
+import org.w3c.css.sac.Parser;
 import org.w3c.css.sac.Selector;
+import springapp.constants.ApplicationConstants;
 
 import javax.servlet.ServletContext;
 import java.io.*;
 import java.util.*;
 
-import springapp.constants.ApplicationConstants;
-
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 11.08.2009
- * @Time: 14:13:49
- */
 public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
     public CSSResourceLoaderImpl() {
     }
@@ -51,7 +50,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
         InputStreamReader fileReader = null;
         try {
             fileReader = new InputStreamReader(resource);
-            Parser parser = new CustomParser();
+            Parser parser = new SACParserCSS21();
             InputSource inputSource = new InputSource(fileReader/*normalizingReader*/);
             ResourcesLoaderFactory loaderFactory = getResourcesLoaderFactory();
             CSSDocHandler docHandler = new CSSDocHandler(
@@ -104,7 +103,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
                         Object keySelectorList = iterator.next();
                         CSSRuleHolderImpl cssRuleHolder = (CSSRuleHolderImpl)
                                 cssHolder.get(keySelectorList);
-                        CSSSelectorList selectorList = (CSSSelectorList) keySelectorList;
+                        SelectorListImpl selectorList = (SelectorListImpl) keySelectorList;
                         for (int i= 0; null!=selectorList&&i<selectorList.getLength();i++){
                             if (i>0) writer.append(", ");
                             Selector selector = selectorList.item(i);
@@ -179,7 +178,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
                     Object keySelectorList = iterator.next();
                     CSSRuleHolderImpl cssRuleHolder = (CSSRuleHolderImpl)
                             cssHolder.get(keySelectorList);
-                    CSSSelectorList selectorList = (CSSSelectorList) keySelectorList;
+                    SelectorListImpl selectorList = (SelectorListImpl) keySelectorList;
                     for (int i= 0; null!=selectorList&&i<selectorList.getLength();i++){
                         if (i>0) out.write(", ".getBytes());
                         Selector selector = selectorList.item(i);
@@ -262,7 +261,7 @@ public class CSSResourceLoaderImpl extends AbstractResourcesLoader{
                     Object keySelectorList = iterator.next();
                     CSSRuleHolderImpl cssRuleHolder = (CSSRuleHolderImpl)
                             cssHolder.get(keySelectorList);
-                    CSSSelectorList selectorList = (CSSSelectorList) keySelectorList;
+                    SelectorListImpl selectorList = (SelectorListImpl) keySelectorList;
                     for (int i= 0; null!=selectorList&&i<selectorList.getLength();i++){
                         if (i>0) out.write(", ".getBytes());
                         Selector selector = selectorList.item(i);

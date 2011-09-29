@@ -1,3 +1,13 @@
+/*
+ * Theme Builder for ExtJS framework Project.
+ *
+ * Copyright (c) 2009 - 2011 Sergey Chentsov. All rights reserved.
+ *
+ * License: LGPL_v3
+ * Author: Sergey Chentsov (extjs id: iv_ekker)
+ * mailto: sergchentsov@gmail.com
+ */
+
 package cesium.processor;
 
 import cesium.factory.ResourcesProcessorFactoryImpl;
@@ -6,23 +16,13 @@ import cesium.holder.ResourcesHolder;
 import cesium.holder.ThemeParametersHolder;
 import cesium.op.ExtJSRescaleOp;
 import cesium.op.ForegroundShiftOp;
-import org.apache.batik.css.parser.CSSLexicalUnit;
+import com.steadystate.css.parser.LexicalUnitImpl;
 import org.springframework.context.ApplicationContext;
 import org.w3c.css.sac.LexicalUnit;
 
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImageOp;
 
-/**
- * @project: Theme Builder for ExtJS 3.x
- * @Description:
- * @license: LGPL_v3
- * @author: Sergey Chentsov (extjs id: iv_ekker)
- * @mailto: sergchentsov@gmail.com
- * @version: 1.0.0
- * @Date: 17.08.2009
- * @Time: 17:00:51
- */
 public class CSSPropertyProcessorImpl extends AbstractResourcesProcessor {
     public CSSPropertyProcessorImpl(ApplicationContext context, ResourcesProcessorFactoryImpl resourcesProcessorFactory) {
         this.setContext(context);
@@ -96,56 +96,53 @@ public class CSSPropertyProcessorImpl extends AbstractResourcesProcessor {
                 int newIntegerValueG = (bytesG[0]&0xff);
                 int newIntegerValueB = (bytesB[0]&0xff);
 
-                CSSLexicalUnit cssLexicalUnitR = CSSLexicalUnit.createInteger(newIntegerValueR, null);
-                CSSLexicalUnit cssSimpleLexicalUnitAfterR = CSSLexicalUnit.createSimple(
-                        LexicalUnit.SAC_OPERATOR_COMMA ,cssLexicalUnitR);
+                LexicalUnitImpl cssLexicalUnitR = (LexicalUnitImpl)LexicalUnitImpl.createNumber(null, newIntegerValueR);
+                LexicalUnitImpl cssSimpleLexicalUnitAfterR = (LexicalUnitImpl)LexicalUnitImpl.createComma(cssLexicalUnitR);
                 cssLexicalUnitR.setNextLexicalUnit(cssSimpleLexicalUnitAfterR);
 
-                CSSLexicalUnit cssLexicalUnitG = CSSLexicalUnit.createInteger(
-                        newIntegerValueG, cssSimpleLexicalUnitAfterR);
-                CSSLexicalUnit cssSimpleLexicalUnitAfterG = CSSLexicalUnit.createSimple(
-                        LexicalUnit.SAC_OPERATOR_COMMA ,cssLexicalUnitG);
+                LexicalUnitImpl cssLexicalUnitG = (LexicalUnitImpl) LexicalUnitImpl.createNumber( cssSimpleLexicalUnitAfterR,
+                        newIntegerValueG );
+                LexicalUnitImpl cssSimpleLexicalUnitAfterG = (LexicalUnitImpl) LexicalUnitImpl.createComma(cssLexicalUnitG);
                 cssLexicalUnitG.setNextLexicalUnit(cssSimpleLexicalUnitAfterG);
 
-                CSSLexicalUnit cssLexicalUnitB = CSSLexicalUnit.createInteger(
-                        newIntegerValueB, cssSimpleLexicalUnitAfterG);
+                LexicalUnitImpl cssLexicalUnitB = (LexicalUnitImpl) LexicalUnitImpl.createNumber(cssSimpleLexicalUnitAfterG,
+                        newIntegerValueB);
                 cssSimpleLexicalUnitAfterG.setNextLexicalUnit(cssLexicalUnitB);
 
 
-                newLexicalUnit = CSSLexicalUnit.createPredefinedFunction(
-                        lexicalUnit.getLexicalUnitType()
-                        , cssLexicalUnitR
-                        , null);
+                newLexicalUnit = LexicalUnitImpl.createRgbColor(null,
+                        cssLexicalUnitR
+                        );
 
             } else
 
             if ((lexicalUnitType == LexicalUnit.SAC_IDENT)||(lexicalUnitType == LexicalUnit.SAC_STRING_VALUE)){
                 if (null!=familyHeaderFont&&resCssPropHolder.isHeaderFontFamily()){
-                    newLexicalUnit = CSSLexicalUnit.createString(lexicalUnitType, familyHeaderFont, null );
+                    newLexicalUnit = LexicalUnitImpl.createIdent(null, familyHeaderFont);
                 } else if (null!=weightHeaderFont&&resCssPropHolder.isHeaderFontWeight()){
-                    newLexicalUnit = CSSLexicalUnit.createString(lexicalUnitType, weightHeaderFont, null );
+                    newLexicalUnit = LexicalUnitImpl.createIdent(null, weightHeaderFont );
                 } else
                 if (null!=familyFont&&resCssPropHolder.isFontFamily()){
-                    newLexicalUnit = CSSLexicalUnit.createString(lexicalUnitType, familyFont, null );
+                    newLexicalUnit = LexicalUnitImpl.createIdent(null, familyFont);
                 } else if (null!=weightFont&&resCssPropHolder.isFontWeight()){
-                    newLexicalUnit = CSSLexicalUnit.createString(lexicalUnitType, weightFont, null );
+                    newLexicalUnit = LexicalUnitImpl.createIdent(null, weightFont);
                 } else if (resCssPropHolder.isFormTriggerBorderStyle()&&"tp".equals(toolsetName)){
-                    newLexicalUnit = CSSLexicalUnit.createString(LexicalUnit.SAC_STRING_VALUE, "none none none solid",null);
+                    newLexicalUnit = LexicalUnitImpl.createIdent(null, "none none none solid");
                 }
             } else
             if ((lexicalUnitType == LexicalUnit.SAC_PIXEL)){
                 float oldvalue = lexicalUnit.getFloatValue();
                 if (resCssPropHolder.isHeaderFontSize()&&0!=sizeHeaderFontDiff){
-                    newLexicalUnit = CSSLexicalUnit.createFloat(lexicalUnitType, oldvalue+sizeHeaderFontDiff, null );
+                    newLexicalUnit = LexicalUnitImpl.createPixel(null, oldvalue+sizeHeaderFontDiff);
                 } else
                 if (resCssPropHolder.isFontSize()&&0!=sizeFontDiff){
-                    newLexicalUnit = CSSLexicalUnit.createFloat(lexicalUnitType, oldvalue+sizeFontDiff, null );
+                    newLexicalUnit = LexicalUnitImpl.createPixel(null, oldvalue+sizeFontDiff);
                 }
             } else if ((lexicalUnitType == LexicalUnit.SAC_INTEGER)||(lexicalUnitType == LexicalUnit.SAC_REAL)){
                 if (resCssPropHolder.isResizableOpacityCSSProperty()&&null!=transparencyOp){
                     int oldOpacity = lexicalUnit.getIntegerValue()*255;
                     float newOpacity = (oldOpacity + transparencyOp.getOffsets(null)[3])/255;
-                    newLexicalUnit = CSSLexicalUnit.createFloat(lexicalUnitType,newOpacity , null );
+                    newLexicalUnit = LexicalUnitImpl.createNumber(null,newOpacity);
                 }
             } else
             if (lexicalUnitType == LexicalUnit.SAC_URI){
@@ -165,7 +162,7 @@ public class CSSPropertyProcessorImpl extends AbstractResourcesProcessor {
                 /*ResourcesLoader resourcesLoader = loaderFactory.getResourcesLoader(path2resource, context);
             ResourcesHolder resourcesHolder = resourcesLoader.loadResources(path2resource, context);*/
                 String resUrl = lexicalUnit.getStringValue();
-                newLexicalUnit = CSSLexicalUnit.createString(LexicalUnit.SAC_URI, resUrl,null );
+                newLexicalUnit = LexicalUnitImpl.createURI(null, resUrl);
 /*                System.out.println(
                         new StringBuilder().append("path2resource = ")
                                 .append(resourcesPath)
@@ -175,7 +172,7 @@ public class CSSPropertyProcessorImpl extends AbstractResourcesProcessor {
 /*            if (lexicalUnitType == LexicalUnit.SAC_IDENT
                 *//*||lexicalUnitType == LexicalUnit.SAC_STRING_VALUE*//*){
                 //SystemColorSupport.getSystemColor(lexicalUnit.toString()); //CSSConstants
-                //newLexicalUnit = CSSLexicalUnit.createString(lexicalUnitType, lexicalUnit.getStringValue(),null );
+                //newLexicalUnit = LexicalUnitImpl.createString(lexicalUnitType, lexicalUnit.getStringValue(),null );
                 //propValue = lxUnit.getStringValue()+";";
             }*/
 /*        if (lexicalUnitType == LexicalUnit.SAC_INTEGER){
