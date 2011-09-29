@@ -50,7 +50,7 @@ public class SACParserCSS21TokenManager implements SACParserCSS21Constants
         char c0 = s1.charAt(0);
         char c1 = s1.charAt(end);
         if ((c0 == '"' && c1 == '"')
-            || (c0 == '\u005c'' && c1 == '\u005c''))
+            || (c0 == '\'' && c1 == '\''))
         {
             return trimBy(s1, 1, 1);
         }
