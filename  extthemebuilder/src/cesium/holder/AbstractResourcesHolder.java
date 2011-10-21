@@ -10,11 +10,10 @@
 
 package cesium.holder;
 
-import java.rmi.server.UID;
 import java.util.*;
 
 public abstract class AbstractResourcesHolder extends LinkedHashMap implements ResourcesHolder{
-    protected UID ouid = new UID();
+    protected UUID ouid = UUID.randomUUID();
     private String resourcesPath;
     private int resourcesPathHashCode;
     private boolean isForeground;
