@@ -148,6 +148,6 @@ Client side components or libraries usage
 / Ext.ux.ColorPicker           / LGPLv3     /
 / Ext.ux.form.SuperBoxSelect   / TBA        /
 
-**** TBA (To be announced)
+*** TBA (To be announced)
 
 
