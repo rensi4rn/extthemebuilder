@@ -26,22 +26,23 @@
 
 package com.steadystate.css.dom;
 
-import org.w3c.dom.DOMException;
-
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import org.w3c.dom.DOMException;
 
 /**
  * Custom {@link DOMException} extension.
  *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author rbri
  */
 public class DOMExceptionImpl extends DOMException {
 
     private static final long serialVersionUID = 7365733663951145145L;
 
     public static final int SYNTAX_ERROR = 0;
-    public static final int ARRAY_OUT_OF_BOUNDS = 1;
+    public static final int INDEX_OUT_OF_BOUNDS = 1;
     public static final int READ_ONLY_STYLE_SHEET = 2;
     public static final int EXPECTING_UNKNOWN_RULE = 3;
     public static final int EXPECTING_STYLE_RULE = 4;
@@ -60,6 +61,7 @@ public class DOMExceptionImpl extends DOMException {
     public static final int IMPORT_NOT_FIRST = 17;
     public static final int NOT_FOUND = 18;
     public static final int NOT_IMPLEMENTED = 19;
+    public static final int INSERT_BEFORE_IMPORT = 20;
 
     private static ResourceBundle ExceptionResource_ =
         ResourceBundle.getBundle(
@@ -67,18 +69,23 @@ public class DOMExceptionImpl extends DOMException {
             Locale.getDefault());
 
     public DOMExceptionImpl(final short code, final int messageKey) {
-        super(code, ExceptionResource_.getString(keyString(messageKey)));
+        this(code, messageKey, null);
     }
 
     public DOMExceptionImpl(final int code, final int messageKey) {
-        super((short) code, ExceptionResource_.getString(keyString(messageKey)));
+        this(code, messageKey, null);
     }
 
-    public DOMExceptionImpl(final short code, final int messageKey, final String info) {
-        super(code, ExceptionResource_.getString(keyString(messageKey)));
+    public DOMExceptionImpl(final int code, final int messageKey, final String info) {
+        super((short) code, constructMessage(messageKey, info));
     }
 
-    private static String keyString(final int key) {
-        return "s" + String.valueOf(key);
+    private static String constructMessage(final int key, final String info) {
+        final String messageKey = "s" + String.valueOf(key);
+        String message = ExceptionResource_.getString(messageKey);
+        if (null != info && info.length() > 0) {
+            message = message + " (" + info + ")";
+        }
+        return message;
     }
 }

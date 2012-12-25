@@ -26,7 +26,15 @@
 
 package com.steadystate.css.parser.selectors;
 
-import org.w3c.css.sac.*;
+import org.w3c.css.sac.AttributeCondition;
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.CombinatorCondition;
+import org.w3c.css.sac.Condition;
+import org.w3c.css.sac.ConditionFactory;
+import org.w3c.css.sac.ContentCondition;
+import org.w3c.css.sac.LangCondition;
+import org.w3c.css.sac.NegativeCondition;
+import org.w3c.css.sac.PositionalCondition;
 
 /**
  *
@@ -61,8 +69,7 @@ public class ConditionFactoryImpl implements ConditionFactory {
         return new AttributeConditionImpl(localName, value);
     }
 
-    public AttributeCondition createIdCondition(final String value)
-        throws CSSException {
+    public AttributeCondition createIdCondition(final String value) throws CSSException {
         return new IdConditionImpl(value);
     }
 

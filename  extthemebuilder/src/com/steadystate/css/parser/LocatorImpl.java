@@ -26,10 +26,11 @@
 
 package com.steadystate.css.parser;
 
-import com.steadystate.css.util.LangUtils;
+import java.io.Serializable;
+
 import org.w3c.css.sac.Locator;
 
-import java.io.Serializable;
+import com.steadystate.css.util.LangUtils;
 
 /**
  * Implementation of {@link Locator}.

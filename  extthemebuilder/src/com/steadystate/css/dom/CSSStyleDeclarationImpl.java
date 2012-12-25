@@ -26,18 +26,22 @@
 
 package com.steadystate.css.dom;
 
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.util.LangUtils;
+import java.io.Serializable;
+import java.io.StringReader;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.css.sac.InputSource;
+
 import org.w3c.dom.DOMException;
+
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSValue;
 
-import java.io.Serializable;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
+import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.util.LangUtils;
 
 /**
  * Implementation of {@link CSSStyleDeclaration}.

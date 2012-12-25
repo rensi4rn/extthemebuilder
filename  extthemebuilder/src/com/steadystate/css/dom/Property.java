@@ -26,28 +26,26 @@
 
 package com.steadystate.css.dom;
 
-import com.steadystate.css.util.LangUtils;
 import org.w3c.dom.css.CSSValue;
 
-import java.io.Serializable;
+import com.steadystate.css.util.LangUtils;
 
 /**
- *
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author rbri
  */
-public class Property extends CSSOMObjectImpl implements Serializable {
-
+public class Property extends CSSOMObjectImpl {
     private static final long serialVersionUID = 8720637891949104989L;
+
     private String name_;
     private CSSValue value_;
     private boolean important_;
 
-    public void setName(final String name) {
-        name_ = name;
-    }
-
     /**
-     * Creates new Property
+     * Creates new Property.
+     * @param name the name
+     * @param value the value
+     * @param important true if the important flag set
      */
     public Property(final String name, final CSSValue value, final boolean important) {
         name_ = name;
@@ -55,37 +53,83 @@ public class Property extends CSSOMObjectImpl implements Serializable {
         important_ = important;
     }
 
+    /**
+     * Constructor.
+     * The attributes are null.
+     */
     public Property() {
         super();
     }
 
+    /**
+     * Returns the name.
+     * @return the name
+     */
     public String getName() {
         return name_;
     }
 
+    /**
+     * Sets the name to a new value.
+     * @param name the new name
+     */
+    public void setName(final String name) {
+        name_ = name;
+    }
+
+    /**
+     * Returns the value.
+     * @return the value
+     */
     public CSSValue getValue() {
         return value_;
     }
 
+    /**
+     * Returns true if the important flag is set.
+     * @return true or false
+     */
     public boolean isImportant() {
         return important_;
     }
 
+    /**
+     * Sets the value to a new value.
+     * @param value the new CSSValue
+     */
     public void setValue(final CSSValue value) {
         value_ = value;
     }
 
+    /**
+     * Sets the important flag to a new value.
+     * @param important the new flag value
+     */
     public void setImportant(final boolean important) {
         important_ = important;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return name_ + ": "
-            + value_.toString()
-            + (important_ ? " !important" : "");
+        final StringBuilder result = new StringBuilder();
+        result.append(name_);
+        result.append(":");
+        if (null != value_) {
+            result.append(" ");
+            result.append(value_.toString());
+        }
+        if (important_) {
+            result.append(" !important");
+        }
+        return result.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -101,6 +145,9 @@ public class Property extends CSSOMObjectImpl implements Serializable {
             && LangUtils.equals(value_, p.value_);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

@@ -26,12 +26,14 @@
 
 package com.steadystate.css.dom;
 
-import com.steadystate.css.util.LangUtils;
+import java.io.Serializable;
+
 import org.w3c.dom.DOMException;
+
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSUnknownRule;
 
-import java.io.Serializable;
+import com.steadystate.css.util.LangUtils;
 
 /**
  * Implementation of {@link CSSUnknownRule}.

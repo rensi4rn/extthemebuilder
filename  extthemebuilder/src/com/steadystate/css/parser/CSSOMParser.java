@@ -26,10 +26,19 @@
 
 package com.steadystate.css.parser;
 
-import com.steadystate.css.dom.*;
-import com.steadystate.css.sac.DocumentHandlerExt;
-import com.steadystate.css.userdata.UserDataConstants;
-import org.w3c.css.sac.*;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Stack;
+
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.ErrorHandler;
+import org.w3c.css.sac.InputSource;
+import org.w3c.css.sac.LexicalUnit;
+import org.w3c.css.sac.Locator;
+import org.w3c.css.sac.Parser;
+import org.w3c.css.sac.SACMediaList;
+import org.w3c.css.sac.SelectorList;
 import org.w3c.css.sac.helpers.ParserFactory;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
@@ -38,10 +47,22 @@ import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.css.CSSValue;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Stack;
+import com.steadystate.css.dom.CSSCharsetRuleImpl;
+import com.steadystate.css.dom.CSSFontFaceRuleImpl;
+import com.steadystate.css.dom.CSSImportRuleImpl;
+import com.steadystate.css.dom.CSSMediaRuleImpl;
+import com.steadystate.css.dom.CSSOMObject;
+import com.steadystate.css.dom.CSSPageRuleImpl;
+import com.steadystate.css.dom.CSSRuleListImpl;
+import com.steadystate.css.dom.CSSStyleDeclarationImpl;
+import com.steadystate.css.dom.CSSStyleRuleImpl;
+import com.steadystate.css.dom.CSSStyleSheetImpl;
+import com.steadystate.css.dom.CSSUnknownRuleImpl;
+import com.steadystate.css.dom.CSSValueImpl;
+import com.steadystate.css.dom.MediaListImpl;
+import com.steadystate.css.dom.Property;
+import com.steadystate.css.sac.DocumentHandlerExt;
+import com.steadystate.css.userdata.UserDataConstants;
 
 /**
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
@@ -119,11 +140,11 @@ public class CSSOMParser {
         final CSSOMHandler handler = new CSSOMHandler();
         handler.setOwnerNode(ownerNode);
         handler.setHref(href);
-        this.parser_.setDocumentHandler(handler);
-        this.parser_.parseStyleSheet(source);
+        parser_.setDocumentHandler(handler);
+        parser_.parseStyleSheet(source);
         final Object o = handler.getRoot();
         if (o instanceof CSSStyleSheet) {
-            return (CSSStyleSheet) handler.getRoot();
+            return (CSSStyleSheet) o;
         }
         return null;
     }
@@ -141,19 +162,17 @@ public class CSSOMParser {
         return sd;
     }
 
-    public void parseStyleDeclaration(final CSSStyleDeclaration sd, final InputSource source)
-        throws IOException {
-
+    public void parseStyleDeclaration(final CSSStyleDeclaration sd, final InputSource source) throws IOException {
         final Stack<Object> nodeStack = new Stack<Object>();
         nodeStack.push(sd);
         final CSSOMHandler handler = new CSSOMHandler(nodeStack);
-        this.parser_.setDocumentHandler(handler);
-        this.parser_.parseStyleDeclaration(source);
+        parser_.setDocumentHandler(handler);
+        parser_.parseStyleDeclaration(source);
     }
 
     public CSSValue parsePropertyValue(final InputSource source) throws IOException {
         final CSSOMHandler handler = new CSSOMHandler();
-        this.parser_.setDocumentHandler(handler);
+        parser_.setDocumentHandler(handler);
         final LexicalUnit lu = parser_.parsePropertyValue(source);
         if (null == lu) {
             return null;
@@ -163,8 +182,8 @@ public class CSSOMParser {
 
     public CSSRule parseRule(final InputSource source) throws IOException {
         final CSSOMHandler handler = new CSSOMHandler();
-        this.parser_.setDocumentHandler(handler);
-        this.parser_.parseRule(source);
+        parser_.setDocumentHandler(handler);
+        parser_.parseRule(source);
         return (CSSRule) handler.getRoot();
     }
 

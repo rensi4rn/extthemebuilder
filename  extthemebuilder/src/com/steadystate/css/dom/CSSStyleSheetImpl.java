@@ -26,8 +26,14 @@
 
 package com.steadystate.css.dom;
 
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.util.LangUtils;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.io.StringReader;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.SACMediaList;
@@ -40,9 +46,9 @@ import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
 import org.w3c.dom.stylesheets.StyleSheet;
 
-import java.io.*;
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.util.LangUtils;
+import com.steadystate.css.util.ThrowCssExceptionErrorHandler;
 
 /**
  * Implementation of {@link CSSStyleSheet}.
@@ -138,10 +144,18 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
             final InputSource is = new InputSource(new StringReader(rule));
             final CSSOMParser parser = new CSSOMParser();
             parser.setParentStyleSheet(this);
+            parser.setErrorHandler(ThrowCssExceptionErrorHandler.INSTANCE);
             final CSSRule r = parser.parseRule(is);
 
-            if (getCssRules().getLength() > 0) {
+            if (r == null) {
+                // this should neven happen because of the ThrowCssExceptionErrorHandler
+                throw new DOMExceptionImpl(
+                        DOMException.SYNTAX_ERR,
+                        DOMExceptionImpl.SYNTAX_ERROR,
+                        "Parsing rule '" + rule + "' failed.");
+            }
 
+            if (getCssRules().getLength() > 0) {
                 // We need to check that this type of rule can legally go into
                 // the requested position.
                 int msg = -1;
@@ -151,31 +165,36 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
                     if (index != 0) {
                         msg = DOMExceptionImpl.CHARSET_NOT_FIRST;
                     }
-                    else if (getCssRules().item(0).getType()
-                            == CSSRule.CHARSET_RULE) {
+                    else if (getCssRules().item(0).getType() == CSSRule.CHARSET_RULE) {
                         msg = DOMExceptionImpl.CHARSET_NOT_UNIQUE;
                     }
                 }
                 else if (r.getType() == CSSRule.IMPORT_RULE) {
-
                     // Import rules must preceed all other rules (except
                     // charset rules)
                     if (index <= getCssRules().getLength()) {
                         for (int i = 0; i < index; i++) {
                             final int rt = getCssRules().item(i).getType();
-                            if ((rt != CSSRule.CHARSET_RULE)
-                                    || (rt != CSSRule.IMPORT_RULE)) {
+                            if ((rt != CSSRule.CHARSET_RULE) && (rt != CSSRule.IMPORT_RULE)) {
                                 msg = DOMExceptionImpl.IMPORT_NOT_FIRST;
                                 break;
                             }
                         }
                     }
                 }
-
+                else {
+                    if (index <= getCssRules().getLength()) {
+                        for (int i = index; i < getCssRules().getLength(); i++) {
+                            final int rt = getCssRules().item(i).getType();
+                            if ((rt == CSSRule.CHARSET_RULE) || (rt == CSSRule.IMPORT_RULE)) {
+                                msg = DOMExceptionImpl.INSERT_BEFORE_IMPORT;
+                                break;
+                            }
+                        }
+                    }
+                }
                 if (msg > -1) {
-                    throw new DOMExceptionImpl(
-                        DOMException.HIERARCHY_REQUEST_ERR,
-                        msg);
+                    throw new DOMExceptionImpl(DOMException.HIERARCHY_REQUEST_ERR, msg);
                 }
             }
 
@@ -183,10 +202,10 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
             ((CSSRuleListImpl) getCssRules()).insert(r, index);
 
         }
-        catch (final ArrayIndexOutOfBoundsException e) {
+        catch (final IndexOutOfBoundsException e) {
             throw new DOMExceptionImpl(
                 DOMException.INDEX_SIZE_ERR,
-                DOMExceptionImpl.ARRAY_OUT_OF_BOUNDS,
+                DOMExceptionImpl.INDEX_OUT_OF_BOUNDS,
                 e.getMessage());
         }
         catch (final CSSException e) {
@@ -214,10 +233,10 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         try {
             ((CSSRuleListImpl) getCssRules()).delete(index);
         }
-        catch (final ArrayIndexOutOfBoundsException e) {
+        catch (final IndexOutOfBoundsException e) {
             throw new DOMExceptionImpl(
                 DOMException.INDEX_SIZE_ERR,
-                DOMExceptionImpl.ARRAY_OUT_OF_BOUNDS,
+                DOMExceptionImpl.INDEX_OUT_OF_BOUNDS,
                 e.getMessage());
         }
     }
@@ -351,8 +370,7 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
             if (cssRule.getType() == CSSRule.IMPORT_RULE) {
                 final CSSImportRule cssImportRule = (CSSImportRule) cssRule;
                 try {
-                    final URI importURI = new java.net.URI(getBaseUri())
-                        .resolve(cssImportRule.getHref());
+                    final URI importURI = new URI(getBaseUri()).resolve(cssImportRule.getHref());
                     final CSSStyleSheetImpl importedCSS = (CSSStyleSheetImpl)
                         new CSSOMParser().parseStyleSheet(new InputSource(
                             importURI.toString()), null, importURI.toString());
@@ -369,9 +387,7 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
                     ((CSSRuleListImpl) getCssRules()).insert(cssMediaRule, i);
                 }
                 catch (final URISyntaxException e) {
-                    // TODO handle exception
-                    throw new DOMException(DOMException.SYNTAX_ERR,
-                        e.getLocalizedMessage());
+                    throw new DOMException(DOMException.SYNTAX_ERR, e.getLocalizedMessage());
                 }
                 catch (final IOException e) {
                     // TODO handle exception

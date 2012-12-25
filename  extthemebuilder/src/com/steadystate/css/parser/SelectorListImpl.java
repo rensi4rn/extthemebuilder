@@ -26,12 +26,12 @@
 
 package com.steadystate.css.parser;
 
-import org.w3c.css.sac.Selector;
-import org.w3c.css.sac.SelectorList;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.w3c.css.sac.Selector;
+import org.w3c.css.sac.SelectorList;
 
 /**
  * Implementation of {@link SelectorList}.

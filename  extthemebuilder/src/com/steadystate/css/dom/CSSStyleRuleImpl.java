@@ -26,8 +26,10 @@
 
 package com.steadystate.css.dom;
 
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.util.LangUtils;
+import java.io.IOException;
+import java.io.Serializable;
+import java.io.StringReader;
+
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.InputSource;
 import org.w3c.css.sac.SelectorList;
@@ -36,9 +38,8 @@ import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSStyleRule;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.io.StringReader;
+import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.util.LangUtils;
 
 /**
  * Implementation of {@link CSSStyleRule}.
@@ -76,6 +77,10 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl
     }
 
     public String getCssText() {
+        final String styleText = getStyle().getCssText();
+        if (null == styleText || styleText.length() == 0) {
+            return getSelectorText() + " { }";
+        }
         return getSelectorText() + " { " + getStyle().getCssText() + " }";
     }
 

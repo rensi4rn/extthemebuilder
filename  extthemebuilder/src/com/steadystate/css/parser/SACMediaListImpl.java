@@ -25,10 +25,10 @@
  */
 package com.steadystate.css.parser;
 
-import org.w3c.css.sac.SACMediaList;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.w3c.css.sac.SACMediaList;
 
 /**
  * Implementation of {@link SACMediaList}.

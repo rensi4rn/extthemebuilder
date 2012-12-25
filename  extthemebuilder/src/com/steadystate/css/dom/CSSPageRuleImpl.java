@@ -26,18 +26,21 @@
 
 package com.steadystate.css.dom;
 
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.util.LangUtils;
-import org.w3c.css.sac.CSSException;
-import org.w3c.css.sac.InputSource;
+import java.io.IOException;
+import java.io.Serializable;
+import java.io.StringReader;
+
 import org.w3c.dom.DOMException;
+
 import org.w3c.dom.css.CSSPageRule;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.io.StringReader;
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.InputSource;
+
+import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.util.LangUtils;
 
 /**
  * Implementation of {@link CSSPageRule}.

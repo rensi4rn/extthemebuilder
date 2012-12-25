@@ -10,8 +10,6 @@ import org.w3c.css.sac.*;
  */
 public class SACParserCSS21 extends AbstractSACParser implements Parser, SACParserCSS21Constants {
 
-    private boolean _quiet = true;
-
     public SACParserCSS21() {
         this((CharStream) null);
     }
@@ -694,7 +692,7 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
 
 //
 // operator
-//  : '/' S* | COMMA S* | '=' S*| /* empty */
+//  : '/' S* | COMMA S* | /* empty */
 //  ;
 //
   final public LexicalUnit operator(LexicalUnit prev) throws ParseException {
@@ -715,22 +713,6 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
         jj_consume_token(S);
       }
                            {if (true) return new LexicalUnitImpl(prev, LexicalUnit.SAC_OPERATOR_SLASH);}
-      break;
-    case EQUALS:                                                              //todo: sc has added sac operator = (short code 255)
-      t = jj_consume_token(EQUALS);
-      label_22:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case S:
-          ;
-          break;
-        default:
-          jj_la1[80] = jj_gen;
-          break label_22;
-        }
-        jj_consume_token(S);
-      }
-                           {if (true) return new LexicalUnitImpl(prev, (short)255);}
       break;
     case COMMA:
       t = jj_consume_token(COMMA);
@@ -1481,7 +1463,7 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     Token t;
     try {
       t = jj_consume_token(HASH);
-            Condition c = this.getConditionFactory().createIdCondition(t.image.substring(1));
+            Condition c = this.getConditionFactory().createIdCondition(unescape(t.image.substring(1), false));
             if (c instanceof Locatable)
             {
                 ((Locatable) c).setLocator(this.getLocator());
@@ -1630,7 +1612,6 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
         case IDENT:
         case STRING:
         case PLUS:
-        case EQUALS:             //todo: sc has added this for expression like  filter:alpha(opacity = 50 );
         case COMMA:
         case HASH:
         case EMS:
@@ -1663,7 +1644,6 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case COMMA:
         case SLASH:
-        case EQUALS:             //todo: sc has added this for expression like  filter:alpha(opacity = 50 );
           body = operator(body);
           break;
         default:
@@ -2002,6 +1982,26 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     finally { jj_save(0, xla); }
   }
 
+  private boolean jj_3R_47() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_51()) {
+    jj_scanpos = xsp;
+    if (jj_3R_52()) return true;
+    }
+    return false;
+  }
+
+  private boolean jj_3R_53() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_56()) {
+    jj_scanpos = xsp;
+    if (jj_3R_57()) return true;
+    }
+    return false;
+  }
+
   private boolean jj_3R_50() {
     if (jj_scan_token(S)) return true;
     Token xsp;
@@ -2150,26 +2150,6 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
     return false;
   }
 
-  private boolean jj_3R_47() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_51()) {
-    jj_scanpos = xsp;
-    if (jj_3R_52()) return true;
-    }
-    return false;
-  }
-
-  private boolean jj_3R_53() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_56()) {
-    jj_scanpos = xsp;
-    if (jj_3R_57()) return true;
-    }
-    return false;
-  }
-
   /** Generated Token Manager. */
   public SACParserCSS21TokenManager token_source;
   /** Current token. */
@@ -2180,7 +2160,7 @@ public class SACParserCSS21 extends AbstractSACParser implements Parser, SACPars
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
   private int jj_gen;
-  final private int[] jj_la1 = new int[81];   //todo: sc has changed size from 80 to 81
+  final private int[] jj_la1 = new int[80];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;

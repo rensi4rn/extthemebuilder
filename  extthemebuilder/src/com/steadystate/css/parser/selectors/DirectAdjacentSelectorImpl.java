@@ -26,13 +26,14 @@
 
 package com.steadystate.css.parser.selectors;
 
-import com.steadystate.css.parser.Locatable;
-import com.steadystate.css.parser.LocatableImpl;
+import java.io.Serializable;
+
 import org.w3c.css.sac.Selector;
 import org.w3c.css.sac.SiblingSelector;
 import org.w3c.css.sac.SimpleSelector;
 
-import java.io.Serializable;
+import com.steadystate.css.parser.Locatable;
+import com.steadystate.css.parser.LocatableImpl;
 
 /**
  * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
