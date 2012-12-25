@@ -26,12 +26,13 @@
 
 package com.steadystate.css.parser.selectors;
 
-import com.steadystate.css.parser.Locatable;
-import com.steadystate.css.parser.LocatableImpl;
+import java.io.Serializable;
+
 import org.w3c.css.sac.CombinatorCondition;
 import org.w3c.css.sac.Condition;
 
-import java.io.Serializable;
+import com.steadystate.css.parser.Locatable;
+import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *

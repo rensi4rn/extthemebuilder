@@ -26,14 +26,16 @@
 
 package com.steadystate.css.dom;
 
-import com.steadystate.css.util.LangUtils;
-import org.w3c.dom.css.CSSStyleSheet;
-import org.w3c.dom.stylesheets.StyleSheet;
-import org.w3c.dom.stylesheets.StyleSheetList;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.w3c.dom.css.CSSStyleSheet;
+
+import org.w3c.dom.stylesheets.StyleSheet;
+import org.w3c.dom.stylesheets.StyleSheetList;
+
+import com.steadystate.css.util.LangUtils;
 
 /**
  * Implementation of {@link StyleSheetList}.

@@ -26,11 +26,12 @@
 
 package com.steadystate.css.dom;
 
-import org.w3c.css.sac.LexicalUnit;
+import java.io.Serializable;
+
 import org.w3c.dom.DOMException;
 import org.w3c.dom.css.Counter;
 
-import java.io.Serializable;
+import org.w3c.css.sac.LexicalUnit;
 
 /**
  * Implementation of {@link Counter}.

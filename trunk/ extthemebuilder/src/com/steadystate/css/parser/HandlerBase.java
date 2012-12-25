@@ -26,8 +26,16 @@
 
 package com.steadystate.css.parser;
 
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.CSSParseException;
+import org.w3c.css.sac.ErrorHandler;
+import org.w3c.css.sac.InputSource;
+import org.w3c.css.sac.LexicalUnit;
+import org.w3c.css.sac.Locator;
+import org.w3c.css.sac.SACMediaList;
+import org.w3c.css.sac.SelectorList;
+
 import com.steadystate.css.sac.DocumentHandlerExt;
-import org.w3c.css.sac.*;
 
 /**
  * Empty implementation of the DocumentHandlerExt interface.

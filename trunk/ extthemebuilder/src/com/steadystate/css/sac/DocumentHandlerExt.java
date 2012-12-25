@@ -26,7 +26,12 @@
 
 package com.steadystate.css.sac;
 
-import org.w3c.css.sac.*;
+import org.w3c.css.sac.CSSException;
+import org.w3c.css.sac.DocumentHandler;
+import org.w3c.css.sac.LexicalUnit;
+import org.w3c.css.sac.Locator;
+import org.w3c.css.sac.SACMediaList;
+import org.w3c.css.sac.SelectorList;
 
 public interface DocumentHandlerExt extends DocumentHandler {
 

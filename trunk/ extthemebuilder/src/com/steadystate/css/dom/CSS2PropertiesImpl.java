@@ -26,10 +26,11 @@
 
 package com.steadystate.css.dom;
 
-import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSS2Properties;
-
 import java.io.Serializable;
+
+import org.w3c.dom.DOMException;
+
+import org.w3c.dom.css.CSS2Properties;
 
 /**
  * Implementation of {@link CSS2Properties}.

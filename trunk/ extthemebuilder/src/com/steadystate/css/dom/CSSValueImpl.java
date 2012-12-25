@@ -26,21 +26,27 @@
 
 package com.steadystate.css.dom;
 
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.LexicalUnitImpl;
-import com.steadystate.css.userdata.UserDataConstants;
-import com.steadystate.css.util.LangUtils;
-import org.w3c.css.sac.InputSource;
-import org.w3c.css.sac.LexicalUnit;
-import org.w3c.css.sac.Locator;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.css.*;
-
 import java.io.Serializable;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.w3c.css.sac.InputSource;
+import org.w3c.css.sac.LexicalUnit;
+import org.w3c.css.sac.Locator;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.css.CSSPrimitiveValue;
+import org.w3c.dom.css.CSSValue;
+import org.w3c.dom.css.CSSValueList;
+import org.w3c.dom.css.Counter;
+import org.w3c.dom.css.RGBColor;
+import org.w3c.dom.css.Rect;
+
+import com.steadystate.css.parser.CSSOMParser;
+import com.steadystate.css.parser.LexicalUnitImpl;
+import com.steadystate.css.userdata.UserDataConstants;
+import com.steadystate.css.util.LangUtils;
 
 /**
  * The <code>CSSValueImpl</code> class can represent either a
@@ -73,10 +79,10 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
     public CSSValueImpl(final LexicalUnit value, final boolean forcePrimitive) {
         LexicalUnit parameters = null;
         try {
-            // Batik SAC parser throws IllegalStateException in some cases
             parameters = value.getParameters();
         }
         catch (final IllegalStateException e) {
+            // Batik SAC parser throws IllegalStateException in some cases
         }
 
         if (!forcePrimitive && (value.getNextLexicalUnit() != null)) {
@@ -145,8 +151,8 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
             // Create the string from the LexicalUnits so we include the correct
             // operators in the string
             final StringBuilder sb = new StringBuilder();
-            final List list = (List) value_;
-            final Iterator it = list.iterator();
+            final List<?> list = (List<?>) value_;
+            final Iterator<?> it = list.iterator();
             while (it.hasNext()) {
                 final Object o = it.next();
                 final CSSValueImpl cssValue = (CSSValueImpl) o;

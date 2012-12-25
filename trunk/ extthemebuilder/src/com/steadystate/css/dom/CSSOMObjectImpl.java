@@ -25,11 +25,11 @@
  */
 package com.steadystate.css.dom;
 
-import com.steadystate.css.util.LangUtils;
-
 import java.io.Serializable;
 import java.util.Hashtable;
 import java.util.Map;
+
+import com.steadystate.css.util.LangUtils;
 
 /**
  * Implementation of {@link CSSOMObject}.

@@ -26,13 +26,15 @@
 
 package com.steadystate.css.dom;
 
-import com.steadystate.css.util.LangUtils;
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import com.steadystate.css.util.LangUtils;
 
 /**
  * Implementation of {@link CSSRuleList}.
